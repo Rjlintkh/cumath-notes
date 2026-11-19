@@ -1,0 +1,527 @@
+\chapter{Abelian Groups}
+\section{Classification of Finitely Generated Abelian Groups}
+
+We abbreviate the following theorem by \textbf{FTFGAG}. 
+\begin{theorem}[Fundamental Theorem of Finitely Generated Abelian Groups]
+  Let \(G\) be a finitely generated abelian group. Then \begin{itemize}
+    \item there exist primes \(p_1 < \cdots < p_k\) and decreasing positive integers \(\{n_{ij}\}_j\) such that \[
+      G \cong \Z^r \oplus \bigoplus_{i,j}\Z_{p_i^{\smash[b]{n_{ij}}}};
+    \]
+    \item there exist positive integers \(1 < d_1 \mid d_2 \mid \ldots \mid d_s\) such that \[
+      G \cong \Z^r \oplus \Z_{d_1} \oplus \Z_{d_2} \oplus \ldots \oplus \Z_{d_s}.
+    \]
+    Furthermore, these two decompositions are uniquely determined.
+  \end{itemize}
+\end{theorem}
+
+The integer \(r\) is called the \emph{rank} of \(G\). The primes \(p_i^{n_{ij}}\) are called the \emph{elementary divisors} of \(G\). The integers \(d_i\) are called the \emph{invariant factors} of \(G\).
+
+The structure theorem applied to finite groups sets \(r = 0\), which gives a bijective correspondence \begin{align*}
+  \left\{
+    \begin{aligned}
+        &\text{partitions of \(n_i\)} \\
+        &\text{for \(i = 1,\ldots,k\)}
+    \end{aligned}\right\}
+    \xleftrightarrow{\hspace*{5em}}
+  \left\{
+    \begin{aligned}
+        &\text{finite abelian groups} \\
+        &\text{of order \(p_1^{n_1}\cdots p_k^{n_k}\)} \\
+  \end{aligned}\right\}
+\end{align*}
+
+\begin{corollary}
+  Let \(\K\) be a field and put \(\K^\times = \K\setminus\{0\}\).
+  Every finite group \(G < \K^\times\) is cyclic.
+\end{corollary}
+\begin{proof}
+  By the structure theorem of finitely generated abelian groups, we decompose \[
+    G \cong \Z_{d_1} \oplus \Z_{d_2} \oplus \ldots \oplus \Z_{d_s},
+  \] where \(d_i = p_i^{n_i}\) for some prime \(p_i\) and positive integer \(n_i\).
+  Let \(m = \lcm(d_1,\ldots,d_s) \leq |G|\), then \(a^m = 1\) for all \(a \in G\).
+  However, the polynomial \(x^m - 1\) has at most \(m\) roots in \(\K\), so \(|G|\leq m\).
+  Since \[
+    \lcm(d_1,\ldots,d_s) = |G| =  d_1\cdots d_s,
+  \] we have \(d_1,\ldots,d_s\) pairwise coprime, then by the Chinese remainder theorem, we have \[
+    G \cong \Z_{d_1}\oplus\cdots\oplus\Z_{d_s} \cong \Z_{d_1\cdots d_s} \cong \Z_{|G|}.
+  \]
+\end{proof}
+
+\begin{example}
+  \(\Z_{13}^\times = \{1,2\ldots,12\} = \<2\> = \Z_{12}\).
+\end{example}
+\begin{proof}
+  Since \(13\) is prime, every nonzero residue modulo \(13\) is invertible, so \(\Z_{13}^\times = \{1,2,\ldots,12\}\) under multiplication modulo \(13\).
+
+  The successive powers of \(2\) modulo \(13\) are:
+  \[
+    \begin{array}{c|ccccccccccccc}
+    k&0&1&2&3&4&5&6&7&8&9&10&11&12\\
+    \hline
+    2^k\bmod 13&1&2&4&8&3&6&12&11&9&5&10&7&1
+    \end{array}
+  \]
+  Hence \(\Z_{13}^\times = \<2\> \cong \Z_{12}\).
+\end{proof}
+
+\begin{example}
+  \(\Q\) is not finitely generated as an abelian group.
+\end{example}
+\begin{proof}
+  Suppose \(Q = \<q_1,\ldots,q_n\>\), then we write \(q_i = a_i/b_i\). Put \(B = b_1\cdots b_n\), then since \(1/2B\in\Q\), we can decompose \[
+    \frac{1}{2B} = k_1\frac{a_1}{b_1} + \cdots + k_n\frac{a_n}{b_n}.
+  \]
+  Then we obtain \[
+    \frac{1}{2} = k_1a_1\frac{B}{b_1} + \cdots + k_na_n\frac{B}{b_n} \in \Z,
+  \] a contradiction.
+\end{proof}
+
+\begin{proposition}
+  Let \(G\) be group and \(N\) a normal subgroup of \(G\). Then \begin{enumerate}
+    \item if \(G\) is cyclic, then \(G/N\) is cyclic;
+    \item if \(G\) is abelian, then \(G/N\) is abelian;
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose \(G = \<a\>\) for some \(a\in G\setminus\{e\}\). Then we show \(G/N = \<aN\>\). Let \(bN\in G/N\), then \(b = a^k\) for some \(k\), then \[
+      bN = a^kN = (aN)^k \in \<aN\>.
+    \]
+    \item Suppose \(G\) is abelian. Let \(aN, bN\in G/N\), then \[
+      (aN)(bN) = (ab)N = (ba)N = (bN)(aN). \qedhere
+    \]
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  Consider \(G = \Z_4\times\Z_6\) and \(N = \<(2,3)\>\lhd \Z_4\times\Z_6\).
+  We compute first \[
+    [G:N] = \frac{|G|}{|N|} = \frac{4\cdot 6}{2} = 12.
+  \]
+  By the structure theorem, there are only 2 abelian groups of order \(12\) up to isomorphism, namely \[
+    \Z_2\times\Z_6 \quad\text{and}\quad \Z_{12}.
+  \]
+  Consider the coset \((1,0) + N\), since \(N = \{(0,0), (2,3)\}\), we see \[
+    2(1,0) = (2,0) \notin N, \quad
+    3(1,0) = (3,0) \notin N, \quad
+    4(1,0) = (0,0) \in N,
+  \] so \(|(1,0) + N| = 4\).
+
+  Since in \(\Z_2\times\Z_6\), \[
+    |(a,b)| = \lcm(|a|,|b|) \Bigm| \lcm(2,6) = 6,
+  \], so \(|(a,b)|\neq 4\). We conclude that \(\Z_4\times\Z_6/\<(2,3)\> \cong \Z_{12}\).
+\end{example}
+
+\section{Center Subgroups}
+
+\begin{definition}
+  The \emph{center} of a group \(G\) is the subgroup \[
+    Z(G) = \{g\in G \mid gx = xg \text{ for all } x\in G\}.
+  \]
+\end{definition}
+
+Clearly, \(G\) is abelian if and only if \(Z(G) = G\).
+
+\begin{proposition}
+  Let \(G\) be a group, then the center \(Z(G)\) is a normal subgroup of \(G\).
+\end{proposition}
+\begin{proof}
+  \begin{itemize}
+    \item Clealy \(e\in Z(G)\). Let \(g_1,g_2\in Z(G)\), then \(g_1x = xg_1\) and \(g_2x = xg_2\) for all \(x\in G\). Thus, \[
+      (g_1g_2)x = g_1(g_2x) = g_1(xg_2) = (g_1x)g_2 = (xg_1)g_2 = x(g_1g_2),
+    \] so \(g_1g_2\in Z(G)\), showing \(Z(G) < G\).
+    \item Let \(g\in Z(G)\), \(a\in G\), then \(gx = xg\) for all \(x\in G\). Thus, \begin{align*}
+      (aga^{-1})x = a(ga^{-1})x = a(a^{-1}g)x &= gx \\
+      &= xg = x(ga)a^{-1} = x(ag)a^{-1} = x(aga^{-1}),
+    \end{align*}
+    \item so \(aga^{-1}\in Z(G)\), showing \(Z(G)\lhd G\). \qedhere
+  \end{itemize}
+\end{proof}
+
+\newpage
+\begin{lemma}
+  If \(G/Z(G)\) is cyclic, then \(G\) is abelian.
+\end{lemma}
+\begin{proof}
+  Let \(G/Z(G) = \<aZ(G)\>\) for some \(a\in G\). Let \(x,y\in G\), then \[
+    xZ(G) = (aZ(G))^m = a^mZ(G), \quad
+    yZ(G) = (aZ(G))^n = a^nZ(G)
+  \] for some \(m,n\geq 0\), then \(x = a^m g\) and \(y = a^n g'\) for some \(g,g'\in Z(G)\). Thus \[
+    xy = (a^m g)(a^n g') = a^ma^ngg' = a^na^mg'g
+    = (a^ng')(a^mg) = yx. \qedhere
+  \]
+\end{proof}
+
+\begin{example}
+  For \(S_n\), \(n\neq 2\), we have \(Z(S_n) = \{\id\}\). On the other hand, \(Z(S_2) = S_2\).
+\end{example}
+\begin{proof}
+  Clearly \(Z(S_n) = S_n\) for \(n\leq 2\) since they are abelian. Now suppose \(n\geq 3\).
+  Fix \(\sgm\in Z(S_n)\), let \(i,j,k\in\{1,\ldots,n\}\) be distinct, note by Proposition~\ref{prop:S_n_transp_conjg} that \begin{align*}
+    (i\ j) = \sgm(i\ j)\sgm^{-1} = (\sgm(i)\ \sgm(j)), \qquad
+    (j\ k) = \sgm(j\ k)\sgm^{-1} = (\sgm(j)\ \sgm(k)),
+  \end{align*}
+  which gives \(\{\sgm(i),\sgm(j)\} = \{i,j\}\) and \(\{\sgm(j),\sgm(k)\} = \{j,k\}\), forcing \(\sgm(j) = j\). Then \(\sgm = \id\).
+\end{proof}
+
+\begin{example}
+  For \(GL_n(\R)\), we have \(Z(GL_n(\R)) = \spn_\R^\times\{I_n\}\).
+\end{example}
+\begin{proof}
+  Fix \(A\in Z(GL_n(\R))\), put \(E_{ij} = (\delta_{ij})_{ij}\), then \(E_{ij}^2 = \O_n\), so \[
+    (1 - E_{ij})(1 + E_{ij}) = 1 - E_{ij}^2 = I_n,
+  \] which gives \(1 + E_{ij}\in GL_n(\R)\). Now \[
+    A(1 + E_{ij}) = (1 + E_{ij})A \implies AE_{ij} = E_{ij}A.
+  \] Here \[
+    (AE_{ij})_{kl} = \sum_{m=1}^n A_{km}(E_{ij})_{ml} = A_{ki}\delta_{jl}, \quad
+    (E_{ij}A)_{kl} = \sum_{m=1}^n (E_{ij})_{km}A_{ml} = \delta_{ki}A_{jl},
+  \] therefore \begin{itemize}
+    \item put \((k,l) = (i,i)\) to see \(A_{ij} = 0\) for \(j\neq i\);
+    \item put \((k,l) = (i,j)\) to see \(A_{ii} = A_{jj}\) for all \(i,j\).
+  \end{itemize} Then \(A\in\spn^\times_\R(I_n)\).
+\end{proof}
+
+\begin{example}
+  \(Z(D_n) = \begin{cases}
+    \{e\}, & n \text{ odd} \\
+    \{e,r^{n/2}\}, & n \text{ even}
+  \end{cases}\).
+\end{example}
+\begin{proof}
+  Let \(g\in Z(D_n)\), but in \(D_n\), we only have \(g = r^k\) or \(g = r^ks\).
+  \begin{itemize}
+    \item If \(g = r^k\), put \(x = s\in D_n\), then \[
+      gx = xg \implies r^ks = sr^k \implies r^ks = r^{-k}s \implies r^{2k} = e \implies k = \frac{n}{2}.
+    \]
+    \item If \(g = r^ks\), put \(x = r\in D_n\), then \[
+      gx = xg \implies r^ksr = rr^ks \implies r^{k-1}s = r^{k+1}s \implies r^2 = e \implies n\leq 2. \qedhere
+    \]
+  \end{itemize}
+\end{proof}
+
+
+It is in general not true that if \(H < G\) then \(Z(H) \subseteq H\cap Z(G)\), because in \(H\) there may be less elements needed to commute with than in \(G\).
+
+\newpage
+\begin{definition}
+  The \emph{commutator} of two elements \(a,b\in G\) is the element \[
+    [a,b] = aba^{-1}b^{-1}.
+  \]
+  The \emph{commutator subgroup} of a group \(G\) is the subgroup \[
+    [G,G] = \<[a,b] \mid a,b\in G\>.
+  \]
+\end{definition}
+Clearly, \(G\) is abelian if and only if \([G,G] = \{e\}\).
+
+\begin{definition}
+  The \emph{abelianization} of a group \(G\) is the quotient group \[
+    G^{\ab} = G/[G,G].
+  \]
+\end{definition}
+
+\begin{proposition}
+  The commutator subgroup \([G,G]\) is the smallest normal subgroup of \(G\) such that \(G/[G,G]\) is abelian.
+\end{proposition}
+
+\begin{example}
+  \([S_n,S_n] = A_n\) and \(S_n^\ab \cong \Z_2\).
+\end{example}
+\begin{proof}
+  % Define \[
+  %   \sgn: S_n \longrightarrow \Z_2, \quad
+  %   \sgn(\tau) = \begin{cases}
+  %     0, & \tau \text{ is even} \\
+  %     1, & \tau \text{ is odd}
+  %   \end{cases},
+  % \] then we see \(\ker\sgn = A_n\) and \(\im\sgn = \Z_2\), so by the first isomorphism theorem, we have \[
+  %   S_n/A_n \cong \Z_2,
+  % \] which is abelian, so \([S_n,S_n]\leq A_n\). 
+  Consider \[
+    [(a\ b),(b\ c)] = (a\ b)(b\ c)(b\ a)(c\ b) = (a\ c\ b),
+  \] then \([S_n,S_n]\) contains all \(3\)-cycles, which generate \(A_n\), so \([S_n,S_n]\geq A_n\). Note that since \([S_n:A_n] = 2\), we have \[
+    S_n / A_n \cong \Z_2,
+  \] which is abelian, so \([S_n,S_n]\leq A_n\). We conclude that \([S_n,S_n] = A_n\).
+\end{proof}
+
+\begin{example}
+  \([D_n,D_n] = \<r^2\>\) and \[
+    D_n^\ab \cong \begin{cases}
+      \Z_2\times\Z_2, & n \text{ even} \\
+      \Z_2, & n \text{ odd}
+    \end{cases}.
+  \]
+\end{example}
+\begin{proof}
+  Consider \[
+    [r,s] = rsr^{-1}s^{-1} = rrs^{-1}s^{-1} = r^2,
+  \] then \([D_n,D_n]\geq \<r^2\>\).
+  Note that \begin{align*}
+    D_n/\<r^2\> = \<r^n = r^2 = s^2 = e, sr = r^{-1}s\>
+  \end{align*} is abelian since every element has order at most \(2\). Then \([D_n,D_n] \leq \<r^2\>\).
+  Furthermore, we compute \begin{align*}
+    D_n^\ab = D_n/\<r^2\> \cong \begin{cases}
+      \<r,s \mid r^2 = s^2 = e\> \cong \Z_2\times\Z_2, & n \text{ even} \\
+      \<r,s \mid r\phantom{^2} = s^2 = e\> \cong \Z_2, & n \text{ odd}
+    \end{cases}.
+  \end{align*}
+\end{proof}
+
+\newpage
+
+\begin{example}
+  Let \[
+    G = \Bigg\{
+      \begin{pmatrix}
+        a & b \\
+        0 & c
+      \end{pmatrix} \in \GL_2(\R) \Biggm| a, c \in \R^\times, b \in \R
+    \Bigg\},
+    \qquad
+    N = \Bigg\{
+      \begin{pmatrix}
+        1 & b \\
+        0 & 1
+      \end{pmatrix} \in G \Biggm| b \in \R
+    \Bigg\}.
+  \]
+  Then \([G,G] = N\).
+\end{example}
+\begin{proof}
+  Consider \begin{align*}
+    \Bigg[
+      \begin{pmatrix}
+        a & 0 \\
+        0 & c
+      \end{pmatrix},
+      \begin{pmatrix}
+        1 & b \\
+        0 & 1
+      \end{pmatrix}  
+    \Bigg]
+    &= \begin{pmatrix}
+      a & 0 \\
+      0 & c
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 & b \\
+      0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+      1/a & 0 \\
+      0 & 1/c
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 & -b \\
+      0 & 1
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+      1 & \frac{a}{c}b \\
+      0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+      1 & -b \\
+      0 & 1
+    \end{pmatrix}
+    = \begin{pmatrix}
+      1 & (\frac{a}{c}-1)b \\
+      0 & 1
+    \end{pmatrix} \in N,
+  \end{align*}
+  so \([G,G]\geq N\).
+  % Note that \(G\cong \R^\times\times\R\times\R^\times\) and \(N\cong \R\), we have \[
+  %   \frac{G}{N} \cong \frac{\R^\times\times\R\times\R^\times}{\R} \cong \Bigg\{
+  %     \begin{pmatrix}
+  %       a & 0 \\
+  %       0 & c
+  %     \end{pmatrix} \in G \Biggm| a, c \in \R^\times
+  %   \Bigg\} \cong \R^\times\times\R^\times,
+  % \]
+  Consider \[
+    \f: G \longrightarrow \R^\times\times\R^\times,
+    \quad
+    \begin{pmatrix}
+      a & b \\
+      0 & c
+    \end{pmatrix} \longmapsto (a-1,c-1),
+  \] then \(\ker\f = N\) and \(\im\f = \R^\times\times\R^\times\), so \(G/N\cong\R^\times\times\R^\times\),
+  which is abelian, so \([G,G]\leq N\).
+\end{proof}
+
+
+\section{Series of Groups}
+Let \(G\) be a group.
+\begin{definition}
+  A \emph{subnormal series} of \(G\) is a finite chain of subgroups \[
+    \{e\} = H_0 < H_1 < \cdots < H_n = G
+  \] such that \(H_i \lhd H_{i+1}\) for all \(i\). We call \(n\) the \emph{length} of the series.
+\end{definition}
+
+\begin{definition}
+  A subnormal series of \(G\) is called a \emph{normal series} if \(H_i \lhd G\) for all \(i\).
+\end{definition}
+
+\begin{example}
+  \(\{0\} < 8\Z < 4\Z < \Z\).
+\end{example}
+
+\begin{example}
+  \(\{\id\} < \<(1\ 2)(3\ 4)\> < V_4 < D_4\), where \[
+    V_4 = \{\id, (1\ 2)(3\ 4), (1\ 3)(2\ 4), (1\ 4)(2\ 3)\}\cong \Z_2\times\Z_2
+  \] is called the \emph{Klein four-group}.
+\end{example}
+
+\begin{definition}
+  Given two subnormal series \(\{H_i\}_i\) and \(\{K_j\}_j\) of a group \(G\). We say \(\{K_j\}_j\) is a \emph{refinement} of \(\{H_i\}_i\) if \[
+    \{H_0, H_1, \ldots, H_n\} \subset \{K_0, K_1, \ldots, K_m\}
+  \]
+\end{definition}
+
+\begin{definition}
+  A subnormal (resp. normal) series \(\{H_i\}_i\) of \(G\) is called a \emph{composition} (resp \emph{principal}) \emph{series} if it has no proper refinement.
+\end{definition}
+Equivalently, a composition series is a subnormal series \(\{H_i\}_i\) such that \(H_{i+1}/H_i\) is simple for all \(i\).
+
+\begin{example}
+  The principal series of \(S_n\) when \begin{itemize}
+    \item \(n \geq 5\) or \(n = 3\), is given by \[
+      \{e\} < A_n < S_n.
+    \]
+    \item \(n = 4\), is given by \[
+    \{e\} < \<(1\ 2)(3\ 4)\> < V_4 < A_4 < S_4.
+  \]
+  \end{itemize}
+\end{example}
+
+Clearly, every finite group has a composition series. Given a composition series \[
+  \{e\} = H_0 < H_1 < \cdots < H_n = G,
+\] we obtain a sequence of short exact sequences \[
+  \begin{tikzcd}[row sep=tiny]
+    1 \ar{r} & H_1 \ar[hook]{r} & H_2 \ar[->>]{r} & H_2/H_1 \ar{r} & 1 \\
+    1 \ar{r} & H_2 \ar[hook]{r} & H_3 \ar[->>]{r} & H_3/H_2 \ar{r} & 1 \\
+    & & \vdots \\
+    1 \ar{r} & H_{n-1} \ar[hook]{r} & H_n \ar[->>]{r} & G/H_n \ar{r} & 1
+  \end{tikzcd}
+\]
+
+Here \(1\) denotes the trivial group. Given groups \(G, H, Q\), a sequence of maps \[
+  \begin{tikzcd}
+    1 \ar{r} & H \ar[hook]{r}{\iota} & G \ar[->>]{r}{\pi} & Q \ar{r} & 1
+  \end{tikzcd}
+\] is called \emph{short exact} if \begin{enumerate}
+  \item \(\iota\) is injective;
+  \item \(\pi\) is surjective;
+  \item \(\ker\pi = \im\iota\).
+\end{enumerate} In this case, we say \(G\) is an \emph{extension} of \(H\) by \(Q\).
+
+\begin{theorem}[Jordan-Hölder theorem]
+  Let \(G\) be a finite group. Suppose \begin{align*}
+    \{e\} = H_0 < H_1 < \cdots < H_n = G, \\
+    \{e\} = K_0 < K_1 < \cdots < K_m = G
+  \end{align*} are two composition series for \(G\), then \(n = m\) and \[
+    H_{i+1}/H_i \cong K_{\sgm(i)+1}/K_{\sgm(i)}
+  \] for some \(\sgm\in S_n\).
+\end{theorem}
+
+\section{Solvable Groups}
+
+\begin{definition}
+  A group \(G\) is called \emph{solvable} if it has a subnormal series \[
+    \{e\} = H_0 < H_1 < \cdots < H_n = G
+  \] such that each factor \(H_{i+1}/H_i\) is abelian. In this case, we call such series a \emph{solvable series}.
+\end{definition}
+In other words, a solvable group is a group built from successive extensions of abelian groups.
+
+\begin{example}
+  Every abelian group is solvable, since we can take the subnormal series \(\{e\} < G\).
+\end{example}
+
+\begin{example}
+  \(S_3\) and \(S_4\) and their subgroups are solvable, since we have the subnormal series \[
+    \{e\} < A_3 < S_3, \qquad
+    \{e\} < V_4 < A_4 < S_4.
+  \]
+\end{example}
+
+\begin{example}
+  \(S_n\) is not solvable for \(n\geq 5\), since \(A_n\) is simple and nonabelian.
+\end{example}
+
+\begin{proposition}\
+  \begin{enumerate}
+    \item Every subgroup and quotient of a solvable group is solvable;
+    \item If \(N\lhd G\) and both \(N\) and \(G/N\) are solvable, then \(G\) is solvable.
+  \end{enumerate}
+\end{proposition}
+\begin{proof}
+  \begin{enumerate}[label=(\alph*)]
+    \item Suppose that \(G\) has a solvable series \[
+      \{e\} = K_0 < K_1 < \cdots < K_n = G.
+    \] Let \(H < G\) be a subgroup. Then consider \[
+      \f:H\cap K_{i+1} \longrightarrow K_{i+1}/K_i, \quad
+      h \longmapsto hK_i.
+    \] Now \(\ker\f = H\cap K_i\) and \(\im\f = H\cap K_{i+1}/K_i\) and \[
+      \frac{H\cap K_{i+1}}{H\cap K_i} \cong \frac{H\cap K_{i+1}}{K_i} < \frac{K_{i+1}}{K_i},
+    \] so we have a solvable series \[
+      \{e\} = H\cap K_0 < H\cap K_1 < \cdots < H\cap K_n = H.
+    \]
+  \end{enumerate}
+\end{proof}
+
+\begin{example}
+  A group \(G\) of order \(38\) is solvable.
+\end{example}
+\begin{proof}
+  By Cauchy's theorem, \(G\) admits a subgroup \(H \cong \Z_{19}\). Since \([G:H] = \frac{38}{19} = 2\), we have \(H\) is normal. Therefore, we have a normal series \[
+    \{e\} < H < G,
+  \] where \(H\) and \(G/H\) are abelian, so \(G\) is solvable.
+\end{proof}
+  
+\section{Derived Series}
+
+The commutator subgroup \([G,G]\) of \(G\) is also called the \emph{first derived subgroup} of \(G\), denoted by \(G^{(1)}\). For \(k\geq 1\), we define the \(k\)-th derived subgroup of \(G\) recursively by \[
+  G^{(k)} := [G^{(k-1)}, G^{(k-1)}].
+\]
+
+\begin{definition}
+  We call the series \[
+    G > G^{(1)} > G^{(2)} > \cdots
+  \] the \emph{derived series} of \(G\).
+\end{definition}
+
+\begin{example}
+  \(S_n > A_n > A_n > \cdots\).
+\end{example}
+
+\begin{proposition}
+  A group \(G\) is solvable if and only if \(G^{(k)} = \{e\}\) for some \(k\).
+\end{proposition}
+\begin{proof}
+  For \((\Leftarrow)\), consider the dervied series \[
+    G > G^{(1)} > \cdots > G^{(k)} = \{e\},
+  \] then each \(G^{(i-1)}/G^{(i)} = (G^{(i-1)})^\ab\), which is abelian, so \(G\) is solvable.
+
+  For \((\Rightarrow)\), if we have a solvable series \[
+    \{e\} = H_0 < H_1 < \cdots < H_n = G,
+  \] then since \(G/H_{n-1}\) is abelian, we have \(G^{(1)}\leq H_{n-1}\).
+  Now \(G^{(1)}H_{n-2} < H_{n-1}\), then by the second isomorphism theorem, we have \[
+    \frac{G^{(1)}}{G^{(1)}\cap H_{n-2}} \cong \frac{G^{(1)}H_{n-2}}{H_{n-2}} < \frac{H_{n-1}}{H_{n-2}},
+  \] which is abelian, so \(G^{(2)} < G^{(1)}\cap H_{n-2} < H_{n-2}\), repeating this argument shows that \(G^{(i)} < H_{n-i}\) for all \(i\). Eventually, \(G^{(k)} = \{e\}\) for some \(k\leq n\).
+\end{proof}
+
+\begin{example}
+  The group \(U_2(\R) = \Bigg\{
+      \begin{pmatrix}
+        a & b \\
+        0 & c
+      \end{pmatrix} \in \GL_2(\R) \Biggm| a, c \in \R^\times, b \in \R
+    \Bigg\}\) is solvable.
+\end{example}
+\begin{proof}
+  Recall that \(G^{(1)} = \Bigg\{
+      \begin{pmatrix}
+        1 & b \\
+        0 & 1
+      \end{pmatrix} \in G \Biggm| b \in \R
+    \Bigg\}\), which is abelian, so \(G^{(2)} = \{I_2\}\).
+    Therefore, \(G\) is solvable.
+\end{proof}

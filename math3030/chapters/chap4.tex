@@ -1,0 +1,102 @@
+\chapter{Products of Groups}
+
+\section{Direct Products}
+\begin{definition}
+  Let \(H\), \(K\) be groups. The \emph{direct product} of \(H\) and \(K\) is the group \[
+    H\times K = \{(h,k) \mid h\in H, k\in K\}
+  \] with the operation \((h_1,k_1)(h_2,k_2) = (h_1h_2, k_1k_2)\).
+\end{definition}
+
+\begin{proposition}
+  Let \(G = H\times K\) and put \[
+    \overline{H} = \{(h,e) \mid h\in H\}, \quad
+    \overline{K} = \{(e,k) \mid k\in K\}.
+  \]
+  Then \(\overline{H},\overline{K}\lhd G\) and \[
+    G/\overline{H} \cong K, \quad
+    G/\overline{K} \cong H.
+  \]
+\end{proposition}
+
+\begin{definition}
+  Let \(G_1,\ldots,G_n\) be groups, then the \emph{direct product} of \(G_1,\ldots,G_n\) is the group \[
+    \prod_{i=1}^n G_i = \{(g_1,\ldots,g_n) \mid g_i\in G_i\}
+  \] with the operation \((g_1,\ldots,g_n)(h_1,\ldots,h_n) = (g_1h_1,\ldots,g_nh_n)\).
+  If \(G_1,\ldots,G_n\) are abelian, then \(\prod_{i=1}^n G_i\) is called the \emph{direct sum} of \(G_1,\ldots,G_n\), denoted by \(\bigoplus_{i=1}^n G_i = G_1\oplus\cdots\oplus G_n\).
+\end{definition}
+
+\begin{proposition}
+  Let \(N_i\lhd G_i\) for all \(i = 1,\ldots,n\), then \(\prod_{i=1}^n N_i \lhd \prod_{i=1}^n G_i\) and \[
+    \prod_{i=1}^n G_i\Bigg/\prod_{i=1}^n N_i \cong \prod_{i=1}^n (G_i/N_i).
+  \]
+\end{proposition}
+
+In general, given a normal subgroupp \(N\lhd\prod_{i=1}^n G_i\), the quotient \((\prod_{i=1}^n G_i)/N\) depends not just on the isomorphissm class of \(N\) but also on how \(N\) `sits' inside the product \(\prod_{i=1}^n G_i\).
+
+\newpage
+\begin{example}
+  Consider the subgroups of \(G = \Z_2\times\Z_4\).
+  \begin{enumerate}
+    \item Put \(N = \Z_2\times\{0\}\), then \(G/N \cong \Z_4\).
+    \item Put \(N = \<(1,2)\>\), then \(G/N \cong \Z_4\).
+    \item Put \(N = \<(0,2)\>\), then \(G/N \cong \Z_2\times\Z_2\).
+  \end{enumerate}
+\end{example}
+\begin{proof}
+  Put \(x = (1,0)\) and \(y = (0,1)\), then we realize \[
+    G \cong \<x,y \mid 2x, 4y, xy - yx \>.
+  \]
+  \begin{enumerate}
+    \item We have \(N = \<x\>\), then \begin{align*}
+      G/N &\cong \<x,y \mid 2x, 4y, xy - yx, x \> \\
+      G/N &\cong \<0,y \mid 2(0), 4y, (0)y - y(0) \> \\
+      &\cong \<y \mid 4y\> \cong \Z_4.
+    \end{align*}
+    Equivalently, consider the map \[
+      \f:G\to\Z_4, \quad
+      (a,b)\mapsto b\mod 4.
+    \]
+    Then \(\ker\f = N\) and \(\im\f = \Z_4\).
+
+    \item We have \(N = \<x + 2y\> = \{(0,0),(1,2)\}\), then \begin{align*}
+      G/N &\cong \<x,y \mid 2x, 4y, xy - yx, x + 2y \> \\
+      G/N &\cong \<y \mid 2(-2y), 4y, (-2y)y - y(-2y) \> \\
+      &\cong \<y \mid 4y\> \cong \Z_4.
+    \end{align*}
+    Equivalently, realize \[
+      (a,b) = ax + by = a(-2y) + by = (b - 2a)y = (0, b - 2a).
+    \] Consider the map \[
+      \f:G\to\Z_4, \quad
+      (a,b)\mapsto b - 2a \mod 4.
+    \]
+    Then \[
+      \f(a,b) = 0 \mod 4 \iff b - 2a = 0 \mod 4 \iff (a,b) = (0,0) \text{ or } (1,2),
+    \] and \(\f(0,n) = n \mod 4\), so \(\ker\f = N\) and \(\im\f = \Z_4\).
+
+    \item We have \(N = \<2y\> = \{(0,0),(0,2)\}\), then \begin{align*}
+      G/N &\cong \<x,y \mid 2x, 4y, xy - yx, 2y \> \\
+      &\cong \<x,y \mid 2x, 2y, xy - yx\> = \Z_2 \times \Z_2.
+    \end{align*}
+    Equivalently, realize \[
+      (a,b) = ax + by = ax + (b\mod 2)y = (a, b\mod 2).
+    \]
+    Note that \(a\) is already in \(\Z_2\). Consider the map \[
+      \f:G\to\Z_2\times\Z_2, \quad
+      (a,b)\mapsto (a, b\mod 2).
+    \]
+    Then \(\ker\f = N\) and \(\im\f = \Z_2\times\Z_2\).
+  \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+  Let \(m,n\geq 1\), in the group \(\Z_m\times\Z_n\), \(|(1,1)| = \lcm(m,n)\).
+\end{proposition}
+\begin{corollary}
+  Let \(m,n\geq 1\), then \(\Z_m\times\Z_n\) is cyclic if and only if \(\gcd(m,n) = 1\).
+\end{corollary}
+
+\begin{theorem}
+  More generally, in \(\prod_{i=1}^n G_i\), \[
+    |(a_1,\ldots,a_n)| = \lcm(|a_1|,\ldots,|a_n|).
+  \]
+\end{theorem}

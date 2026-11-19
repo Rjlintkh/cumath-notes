@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper,twoside,openany]{book}
+
+\usepackage[
+  a4paper,
+  inner=1in,
+  outer=0.8in,
+  top=0.8in,
+  bottom=0.4in,
+  footskip=0cm,
+]{geometry}
+
+\input{preamble.tex}
+
+\usepackage{tikz}
+\usetikzlibrary{cd}
+
+\begin{document}
+
+\frontmatter
+\makenotestitle
+\tableofcontents
+
+\mainmatter
+
+\part{Group Theory}
+
+\include{chapters/chap1}
+\include{chapters/chap2}
+\include{chapters/chap3}
+\include{chapters/chap4}
+\include{chapters/chap5}
+\include{chapters/chap6}
+
+
+
+
+
+
+
+
+
+
+\part{Ring Theory}
+
+\chapter{Rings}
+
+
+\end{document}
