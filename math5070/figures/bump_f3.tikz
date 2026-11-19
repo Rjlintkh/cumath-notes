@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+    inner/.style={
+        draw=blue!75!black,
+        fill=blue!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    outer/.style={
+        draw=red!75!black,
+        fill=red!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    middle/.style={
+        draw=red!75!black,
+        fill=gray!10,
+        line width=1pt
+    },
+]
+
+% Radii
+\def\R{2.0}
+\def\r{1.15}
+
+% Outer circle, where outside f_3 = 0
+\draw[outer] (0,0) circle (\R);
+
+% Inner circle, boundary of the f_3 = 1 region
+\draw[middle] (0,0) circle (\r);
+
+% Green central region
+\draw[inner] (0,0) circle (0.82);
+
+\fill[black] (0,0) circle (1.2pt);
+\node[above left] at (0,0) {\(O\)};
+
+\node[blue!75!black] at (0.5,-0.3) {$f_3 \equiv 1$};
+\node[red!75!black] at (\R+0.3,-1) {$f_3 \equiv 0$};
+
+\end{tikzpicture}

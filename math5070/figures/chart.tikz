@@ -1,0 +1,98 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        draw=black,
+        fill=gray!10,
+        line width=1pt
+    },
+    chart/.style={
+        draw=blue!75!black,
+        fill=blue!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    chartarrow/.style={
+        ->,
+        blue!75!black,
+        line width=0.5pt
+    },
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+
+% ------------------------------------------------
+% Curved ambient sheet M
+% ------------------------------------------------
+
+\draw[manifold]
+    (-5.30,-1.15)
+    .. controls (-4.20,-1.65) and (-2.70,-1.10) ..
+    (-1.20,-1.38)
+    .. controls (-0.78,-0.72) and (-0.75,0.72) ..
+    (-1.15,1.48)
+    .. controls (-2.30,1.78) and (-3.75,1.25) ..
+    (-5.05,1.55)
+    .. controls (-5.42,0.83) and (-5.50,-0.35) ..
+    cycle;
+
+\node[black] at (-0.7,-1.2) {\(M\)};
+
+% ------------------------------------------------
+% Smaller curvilinear chart domain U
+%
+% The upper and lower edges follow the local
+% curvature of the corresponding boundaries of M.
+% The side edges bend toward the right, following
+% the curvature of the right-hand boundary of M.
+% ------------------------------------------------
+
+\draw[chart]
+    (-2.95,-0.38)
+    .. controls (-2.58,-0.35) and (-2.02,-0.29) ..
+    (-1.60,-0.38)
+    .. controls (-1.5,-0.22) and (-1.5,0.25) ..
+    (-1.58,0.60)
+    .. controls (-2.00,0.75) and (-2.53,0.65) ..
+    (-2.92,0.6)
+    .. controls (-3.02,0.30) and (-3.04,-0.10) ..
+    cycle;
+
+\node[blue!75!black] at (-2.27,0.15) {\(U\)};
+
+% ------------------------------------------------
+% Coordinate axes for R^2
+% ------------------------------------------------
+
+\coordinate (O) at (1.85,-1.25);
+
+\draw[axis]
+    (O) -- ++(3.30,0)
+    node[right] {\(\R^2\)};
+
+\draw[axis]
+    (O) -- ++(0,2.75);
+
+% ------------------------------------------------
+% Smaller rectangular coordinate image V
+% ------------------------------------------------
+
+\draw[chart]
+    (2.45,-0.52)
+    rectangle
+    (4.30,0.72);
+
+\node[blue!75!black]
+    at (3.375,0.10) {\(V\)};
+
+% ------------------------------------------------
+% Straight chart map
+% ------------------------------------------------
+
+\draw[chartarrow]
+    (-0.72,0.10) -- (2.30,0.10)
+    node[midway,above] {\(\f\)};
+
+\end{tikzpicture}

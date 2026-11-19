@@ -1,0 +1,194 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        draw=black,
+        fill=gray!10,
+        line width=1pt
+    },
+    alpha/.style={
+        draw=blue!75!black,
+        fill=blue!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    beta/.style={
+        draw=red!75!black,
+        fill=red!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    alphaarrow/.style={
+        ->,
+        blue!75!black,
+        line width=0.5pt
+    },
+    betaarrow/.style={
+        ->,
+        red!75!black,
+        line width=0.5pt
+    },
+    mixarrow/.style={
+        ->,
+        blue!75!red!75,
+        line width=0.5pt
+    },
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+
+% M
+\draw[manifold]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-2.95,1.55)
+        (-2.55,2.25)
+        (-1.45,2.55)
+        (-0.20,2.52)
+        (1.00,2.50)
+        (2.15,2.48)
+        (2.80,2.25)
+        (3.00,1.65)
+        (2.55,1.15)
+        (1.25,1.03)
+        (0.05,1.10)
+        (-1.25,1.05)
+        (-2.45,1.12)
+    };
+
+\node at (3.45,1.65) {\(M\)};
+
+% U_alpha
+\draw[alpha]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-2.00,1.65)
+        (-1.65,2.05)
+        (-0.95,2.18)
+        (-0.25,2.08)
+        (0.20,1.85)
+        (0.00,1.52)
+        (-0.75,1.42)
+        (-1.45,1.45)
+    };
+\node[blue!75!black] at (-2.18,2.05) {\(U_\alpha\)};
+
+% U_beta
+\draw[beta]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-0.20,1.80)
+        (0.35,2.08)
+        (1.20,2.08)
+        (2.05,2.00)
+        (2.35,1.65)
+        (2.05,1.35)
+        (1.10,1.28)
+        (0.35,1.38)
+    };
+
+\node[red!75!black] at (2.55,2.00) {\(U_\beta\)};
+
+% U_alpha cap U_beta
+\begin{scope}
+    \clip plot[smooth cycle, tension=0.75] coordinates {
+        (-2.00,1.65)
+        (-1.65,2.05)
+        (-0.95,2.18)
+        (-0.25,2.08)
+        (0.20,1.85)
+        (0.00,1.52)
+        (-0.75,1.42)
+        (-1.45,1.45)
+    };
+    \fill[blue!50!red!50, opacity=0.7]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-0.20,1.80)
+        (0.35,2.08)
+        (1.20,2.08)
+        (2.05,2.00)
+        (2.35,1.65)
+        (2.05,1.35)
+        (1.10,1.28)
+        (0.35,1.38)
+    };
+\end{scope}
+
+% V_alpha
+\draw[alpha]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (-2.85,-0.35)
+        (-2.55,-0.12)
+        (-2.05,-0.10)
+        (-1.65,-0.28)
+        (-1.50,-0.65)
+        (-1.82,-0.92)
+        (-2.32,-0.82)
+        (-2.75,-0.83)
+        (-3.05,-0.63)
+    };
+\node[blue!75!black] at (-3.15,0.05) {\(V_\alpha\)};
+
+% V_alpha overlap
+\draw[red!75!black, fill=blue!50!red!50, opacity=0.7, line width=1pt]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-1.95,-0.18)
+        (-1.65,-0.28)
+        (-1.50,-0.65)
+        (-1.82,-0.90)
+        (-2.12,-0.55)
+    };
+
+% V_beta
+\draw[beta]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (2.15,-0.35)
+        (2.45,-0.08)
+        (3.00,-0.10)
+        (3.55,-0.28)
+        (3.70,-0.65)
+        (3.35,-0.90)
+        (2.82,-0.80)
+        (2.35,-0.88)
+        (1.98,-0.62)
+    };
+\node[red!75!black] at (3.80,0.05) {\(V_\beta\)};
+
+% V_beta overlap
+\draw[blue!75!black, fill=blue!50!red!50, opacity=0.7, line width=1pt]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (2.15,-0.35)
+        (2.45,-0.08)
+        (2.78,-0.20)
+        (2.80,-0.70)
+        (2.35,-0.88)
+        (1.98,-0.62)
+    };
+
+\coordinate (Oa) at (-3.70,-1.35);
+\draw[axis] (Oa) -- ++(1.75,0) node[right] {\(\R^m\)};
+\draw[axis] (Oa) -- ++(0,1.45);
+
+\coordinate (Ob) at (1.65,-1.35);
+\draw[axis] (Ob) -- ++(1.75,0)
+    node[right] {\(\R^m\)};
+\draw[axis] (Ob) -- ++(0,1.45);
+
+%%% ARROWS
+
+% phi_alpha arrow
+\draw[alphaarrow]
+    (-0.9,1.2) -- (-2.25,0.2)
+    node[midway,left] {\(\varphi_\alpha\)};
+
+% phi_beta arrow
+\draw[betaarrow]
+    (1.15,1) -- (2.85,0.2)
+    node[midway,right] {\(\varphi_\beta\)};
+
+% phi_alphabeta arrow
+\draw[mixarrow]
+    (-1.25,-0.5) -- (1.35,-0.5)
+    node[midway,above] {\(\varphi_{\alpha\beta}\)};
+
+\end{tikzpicture}

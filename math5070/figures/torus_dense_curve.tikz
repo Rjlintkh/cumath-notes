@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+    spacefilling/.style={postaction={
+        pattern={
+            Lines[
+                angle=45,
+                distance=3pt,
+                line width=1pt
+            ]
+        },
+        pattern color=blue!75!black,
+    }},
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+    \draw[spacefilling, line width=1pt] (0,0) rectangle (3,3);
+
+    
+    \draw[axis] (0,3) -- (1.65,3);
+    \draw[axis] (0,0) -- (1.65,0);
+
+    \draw[axis] (0,0) -- (0,1.45);
+    \draw[axis] (0,0) -- (0,1.85);
+
+    \draw[axis] (3,0) -- (3,1.45);
+    \draw[axis] (3,0) -- (3,1.85);
+
+    \node[blue!75!black] at (4.3,0.7) {slope \(=\sqrt{2}\)};
+\end{tikzpicture}

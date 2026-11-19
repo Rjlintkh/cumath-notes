@@ -1,0 +1,86 @@
+\begin{tikzpicture}
+
+% ------------------------------------------------
+% Torus M, using fills and circular/elliptic paths
+% ------------------------------------------------
+
+% Main torus body: outer ellipse with inner hole removed
+\path[
+    fill=gray!18,
+    draw=black,
+    line width=1pt,
+    even odd rule
+]
+    (0,0) ellipse [x radius=4.25, y radius=2.05]
+    (0,0.12) ellipse [x radius=1.35, y radius=0.42];
+
+% Subtle lower body color, still using fill not shade
+\path[
+    fill=gray!28,
+    opacity=0.35
+]
+    (0,-0.35) ellipse [x radius=3.85, y radius=1.55];
+
+% Redraw the outer boundary on top
+\draw[
+    black,
+    line width=1pt
+]
+    (0,0) ellipse [x radius=4.25, y radius=2.05];
+
+% Inner hole, filled white
+\path[
+    fill=white,
+    draw=black,
+    line width=1pt
+]
+    (0,0.12) ellipse [x radius=1.35, y radius=0.42];
+
+% A small lower rim of the hole
+\draw[
+    gray!55,
+    line width=0.6pt
+]
+    (0,0.02) ellipse [x radius=1.10, y radius=0.24];
+
+\node at (3.75,2.10) {\(M\)};
+
+% ------------------------------------------------
+% Point p and tangent space T_pM, in blue
+% ------------------------------------------------
+
+\coordinate (p) at (2.25,0.85);
+
+% Tangent space as a blue filled tangent plane
+\begin{scope}[rotate around={-8:(p)}]
+    \path[
+        fill=blue!30,
+        draw=blue!80!black,
+        fill opacity=0.70,
+        line width=1pt
+    ]
+        (p) ellipse [x radius=1.35, y radius=0.45];
+\end{scope}
+
+% Tangent directions
+\draw[
+    ->,
+    blue!80!black,
+    line width=1pt
+]
+    (p) -- ($(p)+(1.00,-0.15)$);
+
+\draw[
+    ->,
+    blue!80!black,
+    line width=1pt
+]
+    (p) -- ($(p)+(0.25,0.58)$);
+
+% Point p
+\fill[blue!80!black] (p) circle [radius=2.6pt];
+
+\node[blue!80!black, above right] at (p) {\(p\)};
+\node[blue!80!black] at ($(p)+(1.55,0.45)$) {\(T_pM\)};
+
+\end{tikzpicture}

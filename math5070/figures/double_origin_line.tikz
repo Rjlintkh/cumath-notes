@@ -1,0 +1,31 @@
+\begin{tikzpicture}[x=0.4cm,y=0.55cm, line cap=round, line join=round]
+    \begin{scope}[shift={(0,0)}]
+        \draw[thick,-Stealth] (-6, 1) -- (6, 1);
+        \draw[thick,-Stealth] (-6,-1) -- (6,-1);
+
+        \fill (0, 1) circle (1.2pt);
+        \fill (0,-1) circle (1.2pt);
+
+        \foreach \x in {-5,-2,2,5}{
+            \fill (\x, 1) circle (0.9pt);
+            \fill (\x,-1) circle (0.9pt);
+            \draw[densely dashed] (\x,0.82) -- (\x,-0.82);
+        }
+
+        \node[above] at (0,1.25) {\(\mathbb{R}\times\{+1\}\)};
+        \node[below] at (0,-1.25) {\(\mathbb{R}\times\{-1\}\)};
+    \end{scope}
+
+    \draw[->] (6.8,0) -- (9.4,0)
+        node[midway, above, font=\footnotesize] {\(\sim\)};
+
+    \begin{scope}[shift={(17,0)}]
+        \draw[thick,-] (-6,0) -- (-0.1,0);
+        \draw[thick,-Stealth] ( 0.1,0) -- ( 6,0);
+        \draw[thick, fill=white] (0,0) circle (1.5pt);
+        \node[below] at (0,-1.25) {\(M\)};
+
+        \fill (0, 0.95) circle (1.2pt);
+        \fill (0,-0.95) circle (1.2pt);
+    \end{scope}
+\end{tikzpicture}

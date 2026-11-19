@@ -1,0 +1,167 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        draw=black,
+        fill=gray!10,
+        line width=1pt
+    },
+    alpha/.style={
+        draw=blue!75!black,
+        fill=blue!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    beta/.style={
+        draw=red!75!black,
+        fill=red!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    alphaarrow/.style={
+        ->,
+        blue!75!black,
+        line width=0.5pt
+    },
+    betaarrow/.style={
+        ->,
+        red!75!black,
+        line width=0.5pt
+    },
+    mixarrow/.style={
+        ->,
+        blue!75!red!75,
+        line width=0.5pt
+    },
+    maparrow/.style={
+        ->,
+        black,
+        line width=0.5pt
+    },
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+
+% M
+\draw[manifold]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-4.20,1.40)
+        (-3.95,2.20)
+        (-3.20,2.85)
+        (-2.35,2.95)
+        (-1.70,2.60)
+        (-1.35,1.95)
+        (-1.75,1.35)
+        (-2.55,1.10)
+        (-3.45,1.05)
+    };
+\node at (-3.5,3.2) {\(M\)};
+
+% U_alpha in M
+\draw[alpha]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (-3.30,2.15)
+        (-3.10,2.45)
+        (-2.70,2.50)
+        (-2.35,2.35)
+        (-2.28,2.00)
+        (-2.55,1.78)
+        (-2.95,1.80)
+        (-3.25,1.90)
+    };
+
+\node[blue!75!black] at (-2.75,2.10) {\(U_\alpha\)};
+
+% N
+\draw[manifold]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (1.30,1.40)
+        (1.55,2.20)
+        (2.35,2.80)
+        (3.25,2.90)
+        (4.10,2.62)
+        (4.55,2.05)
+        (4.35,1.45)
+        (3.55,1.15)
+        (2.45,1.10)
+        (1.65,1.18)
+    };
+\node at (3.85,3.2) {\(N\)};
+
+% X_beta in N
+\draw[beta]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (2.40,2.18)
+        (2.65,2.45)
+        (3.15,2.48)
+        (3.65,2.35)
+        (3.78,2.00)
+        (3.45,1.78)
+        (2.95,1.80)
+        (2.52,1.92)
+    };
+
+\node[red!75!black] at (3.1,2.1) {\(X_\beta\)};
+
+% f: M -> N
+\draw[maparrow]
+    (-1.15,2.20) -- (1.20,2.20)
+    node[midway,above] {\(f\)};
+
+% V_alpha in R^m
+\draw[alpha]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (-3.65,-1.15)
+        (-3.35,-0.85)
+        (-2.70,-0.75)
+        (-2.18,-0.85)
+        (-1.88,-1.15)
+        (-2.15,-1.48)
+        (-2.70,-1.58)
+        (-3.30,-1.48)
+    };
+\node[blue!75!black] at (-2.75,-1.2) {\(V_\alpha\)};
+
+% R^m
+\coordinate (O) at (-4.1,-2.1);
+\draw[axis] (O) -- ++(1.5,0) node[right] {\(\R^m\)};
+\draw[axis] (O) -- ++(0,1.5);
+
+% phi_alpha chart arrow
+\draw[alphaarrow]
+    (-2.8,1.55) -- (-2.8,-0.55)
+    node[midway,left] {\(\varphi_\alpha\)};
+
+% Y_beta in R^n
+\draw[beta]
+    plot[smooth cycle, tension=0.8] coordinates {
+        (1.95,-1.15)
+        (2.25,-0.85)
+        (2.90,-0.75)
+        (3.65,-0.85)
+        (4.00,-1.15)
+        (3.65,-1.45)
+        (2.95,-1.55)
+        (2.30,-1.45)
+    };
+\node[red!75!black] at (3.1,-1.2) {\(Y_\beta\)};
+
+% psi_beta chart arrow
+\draw[betaarrow]
+    (3.05,1.58) -- (3.05,-0.55)
+    node[midway,right] {\(\psi_\beta\)};
+    
+% R^n
+\coordinate (O) at (1.5,-2.1);
+\draw[axis] (O) -- ++(1.5,0) node[right] {\(\R^n\)};
+\draw[axis] (O) -- ++(0,1.5);
+
+% psi_beta circ f circ phi_alpha^{-1}
+\draw[mixarrow]
+    (-1.60,-1.15) -- (1.30,-1.15)
+    node[midway,above] {\(\psi_\beta\circ f\circ\varphi_\alpha^{-1}\)};
+
+\end{tikzpicture}

@@ -1,0 +1,189 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        fill=gray!10
+    },
+    chart/.style={
+        draw=blue!75!black,
+        fill=blue!20,
+        fill opacity=0.55,
+        draw opacity=1,
+        line width=1pt
+    },
+    sphereedge/.style={
+        draw=black,
+        line width=1pt
+    },
+    hidden/.style={
+        draw=black!65,
+        densely dashed,
+        line width=0.8pt
+    },
+    mapline/.style={
+        draw=red,
+        line width=0.5pt
+    },
+    chartarrow/.style={
+        ->,
+        blue!75!black,
+        line width=0.6pt
+    },
+    chartpoint/.style={
+        fill=blue!75!black,
+        draw=blue!75!black
+    },
+    excludedpoint/.style={
+        fill=white,
+        draw=red,
+        line width=0.8pt
+    },
+    line cap=round,
+    line join=round
+]
+
+% ------------------------------------------------
+% Important coordinates
+% ------------------------------------------------
+
+\coordinate (north) at (0,2.60);
+\coordinate (south) at (0,-1.70);
+
+\coordinate (left equator)  at (-2.15,0.45);
+\coordinate (right equator) at ( 2.15,0.45);
+
+% A point of U_+ and its stereographic image
+\coordinate (x) at (1.86,-0.625);
+\coordinate (image) at (3.72,0.45);
+
+% ------------------------------------------------
+% Ambient ball B^{n+1}
+% ------------------------------------------------
+
+\path[manifold]
+    (0,0.45) circle[radius=2.15];
+
+% ------------------------------------------------
+% Equatorial coordinate plane R^n
+% ------------------------------------------------
+
+\path[chart]
+    (-4.45,1.35)
+    -- (4.65,1.35)
+    -- (5.35,-0.95)
+    -- (-5.20,-0.95)
+    -- cycle;
+
+% Refill the upper hemisphere so that it lies in
+% front of the coordinate plane.
+\path[fill=gray!10]
+    (left equator)
+    arc[
+        start angle=180,
+        end angle=0,
+        radius=2.15
+    ]
+    .. controls (1.50,-0.12) and (-1.50,-0.12) ..
+    (left equator)
+    -- cycle;
+
+% ------------------------------------------------
+% Boundary sphere S^n
+% ------------------------------------------------
+
+% Visible upper boundary
+\draw[sphereedge]
+    (left equator)
+    arc[
+        start angle=180,
+        end angle=0,
+        radius=2.15
+    ];
+
+% Lower boundary hidden by the plane
+\draw[hidden]
+    (left equator)
+    arc[
+        start angle=180,
+        end angle=220,
+        radius=2.15
+    ];
+
+% Lower boundary protruding below the plane
+\draw[sphereedge]
+    ({2.15*cos(220)},{0.45+2.15*sin(220)})
+    arc[
+        start angle=220,
+        end angle=320,
+        radius=2.15
+    ];
+
+% Lower boundary hidden again by the plane
+\draw[hidden]
+    ({2.15*cos(320)},{0.45+2.15*sin(320)})
+    arc[
+        start angle=320,
+        end angle=360,
+        radius=2.15
+    ];
+
+% Back half of the equatorial sphere
+\draw[hidden]
+    (left equator)
+    .. controls (-1.45,1.02) and (1.45,1.02) ..
+    (right equator);
+
+% Front half of the equatorial sphere
+\draw[sphereedge]
+    (left equator)
+    .. controls (-1.45,-0.12) and (1.45,-0.12) ..
+    (right equator);
+
+% ------------------------------------------------
+% Stereographic projection
+% ------------------------------------------------
+
+% Projection ray from the excluded south pole
+\draw[mapline]
+    (south) -- (image);
+
+% Chart map from x to its image
+\draw[chartarrow]
+    (x) -- (image)
+    node[midway,above] {\(\varphi_+\)};
+
+% Point p on the sphere
+\fill[chartpoint]
+    (x) circle (1.6pt);
+
+\node[blue!75!black,above left]
+    at (x) {\(p\)};
+
+% Image of x in R^n
+\fill[chartpoint]
+    ($(image) + (0.05,0.035)$) circle (1.6pt);
+
+\node[blue!75!black,below right]
+    at (image) {\(\varphi_+(p)\)};
+
+% Excluded south pole
+\filldraw[excludedpoint]
+    (south) circle (1.8pt);
+
+\node[red,below]
+    at (south) {\(p_-\)};
+
+% ------------------------------------------------
+% Labels
+% ------------------------------------------------
+
+\node[black]
+    at (-0.72,1.42) {\(S^n\)};
+
+\node[blue!75!black]
+    at (-0.85,2.88)
+    {\(U_+=S^n\setminus\{p_-\}\)};
+
+\node[blue!75!black]
+    at (-4.45,-0.62)
+    {\(\mathbb{R}^n\)};
+
+\end{tikzpicture}

@@ -1,0 +1,107 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        draw=black,
+        fill=gray!10,
+        line width=1pt
+    },
+    submanifold/.style={
+        draw=red!75!black,
+        fill=red!25,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=2pt
+    },
+    chart/.style={
+        draw=blue!75!black,
+        fill=blue!25,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    slice/.style={
+        red!85!black,
+        line width=2pt
+    },
+    chartarrow/.style={
+        ->,
+        red!75!black,
+        line width=0.5pt
+    },
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+
+% M
+\draw[manifold]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-3.50,1.45)
+        (-3.20,2.15)
+        (-2.45,2.65)
+        (-1.45,2.78)
+        (-0.35,2.68)
+        (0.55,2.45)
+        (1.05,1.95)
+        (0.90,1.35)
+        (0.15,1.00)
+        (-0.95,0.92)
+        (-2.15,1.00)
+        (-3.00,1.12)
+    };
+\node[black] at (0.90,2.70) {\(M\)};
+
+% S in M
+\draw[submanifold]
+    (-2.60,1.38) .. controls (-1.75,1.70) and (-0.55,1.92) .. (0.65,2.12);
+\node[red!75!black] at (0.42,1.75) {\(S\)};
+
+% U in M
+\draw[chart]
+    plot[smooth cycle, tension=0.75] coordinates {
+        (-1.85,1.68)
+        (-1.55,2.05)
+        (-1.00,2.18)
+        (-0.38,2.12)
+        (0.00,1.86)
+        (-0.18,1.55)
+        (-0.75,1.45)
+        (-1.38,1.48)
+    };
+
+\node[blue!80!black] at (-2.15,1.85) {\(U\)};
+
+% Point p
+\fill[black] (-1.02,1.82) circle (1.4pt);
+\node[black, above] at (-1.02,1.26) {\(p\)};
+
+% V
+\draw[chart, yshift=-10pt]  
+    plot[smooth cycle, tension=0.75] coordinates {  
+        (-2.05,-1.35)  
+        (-1.85,-0.70)  
+        (-1.35,-0.25)  
+        (-0.62,-0.18)  
+        (-0.05,-0.50)  
+        ( 0.10,-1.10)  
+        (-0.25,-1.60)  
+        (-0.95,-1.75)  
+        (-1.65,-1.65)  
+    };
+\node[blue!80!black] at (-2.4,-1.58) {\(V\)};
+
+\draw[chartarrow, bend left=60]
+    (-0.72,1.55) to
+    node[midway,right] {\(\varphi\)}
+    (-0.72,-1.05);
+    
+% R^k
+\draw[axis] (-1.02,-1.3) -- (0.48,-1.3) node[right] {\(\R^k\)};
+\draw[axis] (-1.02,-1.3) -- (-1.02,0.2) node[above] {\(\R^{m-k}\)};
+
+% Slice image V cap (R^k x {0})
+\draw[submanifold]
+    (-1.7,-1.3) -- (-0.2,-1.3);
+
+\end{tikzpicture}

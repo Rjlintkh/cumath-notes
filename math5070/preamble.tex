@@ -1,0 +1,258 @@
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{mathtools, thmtools}
+% --- workaround for thmtools issue #75 (LaTeX 2026-06 kernel) ---
+\makeatletter
+\@ifundefined{newcounteralias}{}{%
+  \renewcommand\thmt@autorefsetup{\@xa\def\csname\thmt@envname autorefname\@xa\endcsname\@xa{\thmt@thmname}}%
+}
+\makeatother
+% ---------------------
+
+\usepackage{graphicx, tikz, mdframed}
+\usetikzlibrary{arrows.meta, calc, cd, intersections, patterns.meta}
+
+\usepackage{caption, subcaption}
+\captionsetup{labelsep=space} % "Figure 2.1 The ..." (no colon)
+
+% enum
+\usepackage{enumitem}
+\setlist[enumerate,1]{
+  label=\textnormal{\((\roman*)\)},
+  ref=\roman*,
+  leftmargin=*,
+  itemsep=2pt,
+  topsep=3pt
+}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=cyan
+}
+
+% headers
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\quad #1}}
+
+\fancyhead[LE]{\thepage\quad Chapter \thechapter\quad \nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}\quad \thepage}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyfoot[C]{\thepage}
+}
+
+% theorems
+\newtheoremstyle{myplain}
+  {7pt}                         % Space above
+  {4pt}                         % Space below
+  {\normalfont}                    % Body font
+  {0pt}                         % Indentation
+  {\bfseries}                   % Heading font
+  {.}                           % Punctuation after heading
+  {0.5em}                       % Space after heading
+  {%
+    \thmname{#1}%
+    \thmnumber{ #2}%
+    \thmnote{. (#3)}%
+  }
+\theoremstyle{myplain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheoremstyle{mydefinition}
+  {7pt}                         % Space above
+  {4pt}                         % Space below
+  {\normalfont}                 % Body font
+  {0pt}                         % Indentation
+  {\bfseries}                   % Heading font
+  {.}                           % Punctuation after heading
+  {0.5em}                       % Space after heading
+  {%
+    \thmname{#1}%
+    \thmnumber{ #2}%
+    \thmnote{. (#3)}%
+  }
+\theoremstyle{mydefinition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{homework}[theorem]{Homework}
+\newtheorem{project}[theorem]{Project}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% bars
+\usepackage{mdframed}
+
+% proof: headful
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftline=true,
+  linewidth=1.3pt,
+  linecolor=black,
+  backgroundcolor=white,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=8pt,
+  innerrightmargin=0pt,
+  innertopmargin=1pt,
+  innerbottommargin=1pt,
+  skipabove=1pt,
+  skipbelow=7pt,
+  splittopskip=\topskip,
+  splitbottomskip=2pt
+]{proofbar}
+
+% roof: headless
+\newmdenv[
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftline=true,
+  linewidth=1.3pt,
+  linecolor=black,
+  backgroundcolor=white,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=8pt,
+  innerrightmargin=0pt,
+  innertopmargin=2pt,
+  innerbottommargin=2pt,
+  skipabove=8pt,
+  skipbelow=4pt,
+  splittopskip=\topskip,
+  splitbottomskip=2pt
+]{roofbar}
+
+\renewenvironment{proof}[1][Proof]
+  {%
+    \par
+    \begin{proofbar}
+    \noindent\textit{#1.}\enspace\ignorespaces
+  }
+  {%
+    \par
+    \end{proofbar}
+  }
+
+\newenvironment{sol}[1][Solution]
+  {\begin{proof}[#1]}
+  {\end{proof}}
+
+\newenvironment{roof}
+  {%
+    \par
+    \begin{roofbar}
+    \ignorespaces
+  }
+  {%
+    \par
+    \end{roofbar}
+  }
+
+% -------------------------------------------------
+% Macros
+% -------------------------------------------------
+
+\def\C{\mathbb{C}}
+\def\N{\mathbb{N}}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\T{\mathbb{T}}
+\def\Z{\mathbb{Z}}
+
+\def\A{\mathcal{A}}
+\def\B{\mathcal{B}}
+\def\U{\mathcal{U}}
+\def\V{\mathcal{V}}
+\def\W{\mathcal{W}}
+
+\def\bf{\mathbf}
+\def\bb{\mathbb}
+\def\cal{\mathcal}
+\def\frak{\mathfrak}
+
+\def\a{\alpha}
+\def\b{\beta}
+\def\c{\gamma}
+\def\e{\mathbf{e}}
+\def\eps{\epsilon}
+\def\f{\varphi}
+\def\i{\iota}
+\def\g{\mathfrak{g}}
+\def\h{\mathfrak{h}}
+\def\L{\mathcal{L}}
+\def\lda{\lambda}
+\def\Lda{\Lambda}
+\def\Gam{\Gamma}
+\def\sgm{\sigma}
+\def\Sgm{\Sigma}
+\def\tha{\theta}
+\def\omg{\omega}
+\def\Omg{\Omega}
+\def\t{\theta}
+
+\def\U{\cal{U}}
+\def\V{\cal{V}}
+\def\x{\mathbf{x}}
+\def\y{\mathbf{y}}
+% \def\u{\mathbf{u}}
+% \def\v{\mathbf{v}}
+
+\def\RP{\R\mathbf{P}}
+\def\Gr{\mathbf{Gr}}
+
+\def\id{\mathrm{id}}
+\def\GL{\mathrm{GL}}
+\def\gl{\mathfrak{gl}}
+\def\SL{\mathrm{SL}}
+\def\sl{\mathfrak{sl}}
+\def\Sym{\mathrm{Sym}}
+
+\def\dR{\mathrm{dR}}
+
+\def\card{\operatorname{\sharp}}
+\def\consum{\mathbin{\#}}
+\def\codim{\operatorname{codim}}
+\def\vect{\operatorname{Vect}}
+
+\def\cyc{\mathrm{cyc}}
+\DeclareMathOperator{\Alt}{Alt}
+
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\diam}{diam}
+
+\def\osc{\operatorname{osc}}
+\def\rank{\operatorname{rank}}
+\def\supp{\operatorname{supp}}
+\def\spn{\operatorname{span}}
+
+\def\setminus{\mathbin{-}}
+
+\def\<{\langle}
+\def\>{\rangle}
+\def\pa{\partial}
+\def\wed{\wedge}
+\def\wh{\widehat}
+\def\wt{\widetilde}
+\renewcommand{\restriction}{\mathord{\upharpoonright}}
+\def\undersim#1{\underset{\text{#1}}{\sim}}
+
+\newcommand{\longleadsto}{\mathrel{\mathpalette\longleadstoaux{}}}
+\newcommand{\longleadstoaux}[2]{\scalebox{1.8}[1]{\(#1\leadsto\)}}

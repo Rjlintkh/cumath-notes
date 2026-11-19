@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    },
+    bluegraph/.style={
+        blue!75!black,
+        line width=1pt,
+        smooth
+    },
+    redgraph/.style={
+        red!75!black,
+        line width=1pt,
+        smooth
+    },
+]
+
+\draw[axis] (-3.2,0) -- (4.0,0) node[right] {\(x\)};
+\draw[axis] (0,-1.1) -- (0,2.4) node[above] {\(y\)};
+
+\draw[redgraph] (-3.0,0) -- (0,0);
+
+\draw[bluegraph, domain=0.05:3.6, samples=200]
+    plot (\x,{2.0*exp(-1/\x)});
+
+\fill[black] (0,0) circle (1.2pt);
+
+% Label
+\node[above right] at (1.7,1.35) {\(f_1\)};
+\node[below right] at (0,0) {\(0\)};
+
+\end{tikzpicture}

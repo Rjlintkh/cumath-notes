@@ -1,0 +1,92 @@
+\begin{tikzpicture}[
+    >=Stealth,
+    axis/.style={
+        ->,
+        black,
+        line width=1pt
+    },
+    xone/.style={
+        ->,
+        red!85!black,
+        line width=1pt
+    },
+    xtwo/.style={
+        ->,
+        blue!80!black,
+        line width=1pt
+    },
+    gridpt/.style={
+        fill=black,
+        inner sep=1pt,
+        circle
+    }
+]
+
+% ------------------------------------------------
+% Axes in R^3
+% ------------------------------------------------
+\coordinate (O) at (0,0);
+
+% x-axis
+\coordinate (ex) at (-2.0,-1.5);
+
+% y-axis
+\coordinate (ey) at (2.6,0);
+
+% z-axis
+\coordinate (ez) at (0,2.3);
+
+\draw[axis] (O) -- (ex) node[below left] {\(x\)};
+\draw[axis] (O) -- (ey) node[right] {\(y\)};
+\draw[axis] (O) -- (ez) node[above] {\(z\)};
+
+\node[below right] at (O) {\(0\)};
+
+% ------------------------------------------------
+% Vector directions parallel to x-axis and y-axis
+% ------------------------------------------------
+\coordinate (Xdir) at (-0.45,-0.3375); % parallel to x-axis
+\coordinate (Ydir) at (0.55,0);        % parallel to y-axis
+
+% ------------------------------------------------
+% Points in the xy-plane where the distribution is shown
+% ------------------------------------------------
+\foreach \p in {
+    % (-1.25,-0.85),
+    % (-0.55,-0.85),
+    % (0.15,-0.85),
+    % (0.85,-0.85),
+    (-1.25,-0.35),
+    (-0.55,-0.35),
+    (0.15,-0.35),
+    % (1.25,-0.35),
+    (-0.65,0.20),
+    (0.05,0.20),
+    (0.75,0.20),
+    (-0.05,0.75),
+    (0.65,0.75),
+    (1.35,0.75)
+} {
+    \fill[gridpt] \p circle (0.7pt);
+
+    % Red arrows parallel to x-axis
+    \draw[xone] \p -- ++(Xdir);
+
+    % Blue arrows parallel to y-axis
+    \draw[xtwo] \p -- ++(Ydir);
+}
+
+% ------------------------------------------------
+% Labels for basis vectors
+% ------------------------------------------------
+% \draw[xone] (2.55,1.35) -- ++(Xdir)
+%     node[midway, above left] {\(X_1\)};
+
+% \draw[xtwo] (2.55,0.85) -- ++(Ydir)
+%     node[midway, above] {\(X_2\)};
+
+% \node[right] at (3.05,1.08) {
+%     \(\operatorname{span}\{X_1,X_2\}\)
+% };
+
+\end{tikzpicture}

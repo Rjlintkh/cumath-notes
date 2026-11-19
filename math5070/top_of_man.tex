@@ -1,0 +1,34 @@
+\documentclass[11pt]{book}
+
+\let\cleardoublepage\clearpage
+
+\usepackage{geometry}
+\geometry{
+    paper=a4paper,
+    top=2cm, bottom=2cm,
+    left=2cm, right=2cm,
+    % showframe
+}
+
+\input{preamble.tex}
+
+\includeonly{chapters/chap4,chapters/chap5}
+
+% ===============
+% Document
+% ===============
+\begin{document}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\part{Calculus of Manifolds}
+\include{chapters/chap1}
+\include{chapters/chap2}
+\include{chapters/chap3}
+\include{chapters/chap4}
+\part{Topology of Manifolds}
+\include{chapters/chap5}
+\include{chapters/chap6}
+
+\end{document}

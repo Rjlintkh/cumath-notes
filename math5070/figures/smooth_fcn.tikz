@@ -1,0 +1,125 @@
+\begin{tikzpicture}[
+    manifold/.style={
+        draw=black,
+        fill=gray!10,
+        line width=1pt
+    },
+    alpha/.style={
+        draw=blue!75!black,
+        fill=blue!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    beta/.style={
+        draw=red!75!black,
+        fill=red!30,
+        fill opacity=0.7,
+        draw opacity=1,
+        line width=1pt
+    },
+    alphaarrow/.style={
+        ->,
+        blue!75!black,
+        line width=0.5pt
+    },
+    betaarrow/.style={
+        ->,
+        red!75!black,
+        line width=0.5pt
+    },
+    maparrow/.style={
+        ->,
+        black,
+        line width=0.5pt
+    },
+    axis/.style={
+        -Stealth,
+        black,
+        line width=1pt
+    }
+]
+
+\draw[manifold]
+  plot[smooth cycle, tension=0.75] coordinates {
+    (-2.4,1.45)
+    (-2.25,2.25)
+    (-1.55,2.75)
+    (-0.65,2.90)
+    (0.10,2.95)
+    (0.45,2.75)
+    (0.95,2.65)
+    (1.15,2.05)
+    (0.95,1.55)
+    (0.25,1.25)
+    (-0.65,1.20)
+    (-1.55,1.15)
+  };
+\node at (1.6,1.7) {\(M\)};
+
+% U_alpha
+\draw[alpha]
+  plot[smooth cycle, tension=0.8] coordinates {
+    (-1.55,2.00)
+    (-1.40,2.30)
+    (-1.05,2.43)
+    (-0.65,2.42)
+    (-0.35,2.25)
+    (-0.30,1.95)
+    (-0.55,1.75)
+    (-0.95,1.72)
+    (-1.35,1.78)
+  };
+\node[blue!75!black] at (-1.9,2.05) {\(U_\alpha\)};
+
+% U_beta
+\draw[beta]
+  plot[smooth cycle, tension=0.8] coordinates {
+    (-0.85,2.18)
+    (-0.55,2.45)
+    (-0.10,2.48)
+    (0.25,2.30)
+    (0.35,1.95)
+    (0.10,1.68)
+    (-0.35,1.58)
+    (-0.75,1.72)
+    (-0.95,1.95)
+  };
+\node[red!75!black] at (0.70,2.08) {\(U_\beta\)};
+
+% V_alpha
+\draw[alpha]
+  plot[smooth cycle, tension=0.8] coordinates {
+    (-1.90,-0.75)
+    (-1.70,-0.30)
+    (-1.15,-0.10)
+    (-0.55,-0.15)
+    (-0.15,-0.40)
+    (-0.15,-0.85)
+    (-0.50,-1.10)
+    (-1.00,-1.05)
+    (-1.55,-1.15)
+    (-1.80,-1.00)
+  };
+\node[blue!75!black] at (-1, -0.6) {\(V_\alpha\)};
+
+\coordinate (O) at (-2.4,-1.6);
+\draw[axis] (O) -- ++(1.5,0) node[right] {\(\R^m\)};
+\draw[axis] (O) -- ++(0,1.5);
+
+% f : M -> R
+\draw[maparrow]
+    (1.35,2.15) -- (4.00,2.15)
+    node[midway,above] {\(f\)}
+    node[right] {\(\R\)};
+    
+% phi_alpha
+\draw[alphaarrow]
+    (-0.95,1.52) -- (-0.95,0.1)
+    node[midway,right] {\(\varphi_\alpha\)};
+
+% f circ phi^{-1}
+\draw[maparrow]
+    (0.1,-0.45) -- (4.00,1.95)
+    node[midway,below right] {\(f\circ\varphi_\alpha^{-1}\)};
+\end{tikzpicture}
