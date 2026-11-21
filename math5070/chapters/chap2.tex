@@ -433,15 +433,15 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
 
 \section{Lie Brackets and Lie Derivatives}
 
-\begin{theorem}
-  Let \(u\), \(v\) be smooth vector fields on a smooth manifold \(M\). Then there exists a unique smooth vector field \(w\) such that \begin{equation}\label{eqn:lie_brack}
+\begin{lemma}\label{lem:lie_brk_exist}
+  Let \(u\), \(v\) be smooth vector fields on a smooth manifold \(M\). Then there exists a unique smooth vector field \(w\) such that \begin{equation}\label{eqn:lie_brk}
     D_w f = [D_u,D_v]f
     := D_uD_vf - D_vD_uf \quad\text{for all } f\in C^\infty(M).
   \end{equation}
-\end{theorem}
+\end{lemma}
 \begin{proof}
   We shall prove the local existence. Let \((\f,U,V)\) be a chart.
-  It suffices to do everything on \(V\subset\R^n\), so we can abuse notations to write \[
+  It suffices to do everything on \(V\subset\R^n\), so we abuse notations to write \[
     u\leadsto D_u
     = \textcolor{blue}{\sum_{i=1}^n u_i\frac{\pa}{\pa x_i}},
     \quad
@@ -488,8 +488,23 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
   \end{equation}
 \end{definition}
 
-\begin{example}
-  In view of the previous construction of \(w = [u,v]\), we have in local charts that \[
+\begin{example}\label{ex:lie_brk_mixed_deriv}
+  In \(\R^n\), let \(f:\R^m\longrightarrow\R^n\) be a smooth map. Then for any \(i,j\), we have \begin{align*}
+    D_{[\frac{\pa}{\pa x_i},\frac{\pa}{\pa x_j}]}f
+    &= D_{\frac{\pa}{\pa x_i}}D_{\frac{\pa}{\pa x_j}}f - D_{\frac{\pa}{\pa x_j}}D_{\frac{\pa}{\pa x_i}}f \\
+    &= \frac{\pa}{\pa x_i}\left(\frac{\pa f}{\pa x_j}\right) - \frac{\pa}{\pa x_j}\left(\frac{\pa f}{\pa x_i}\right)
+    = \frac{\pa^2 f}{\pa x_i\pa x_j} - \frac{\pa^2 f}{\pa x_j\pa x_i}
+    = 0
+  \end{align*} due to the mixed derivatives theorem.
+\end{example}
+
+\begin{lemma}\label{lem:lie_brk_local}
+  Under a local chart, we have \[
+    [u,v] = D_u(v) - D_v(u).
+  \]
+\end{lemma}
+\begin{proof}
+  In view of the construction of \(w = [u,v]\) in Lemma~\ref{lem:lie_brk_exist}, we have \[
     [u,v] = \sum_{i=1}^n\left[
       \textcolor{blue}{\sum_{j=1}^n u_j\frac{\pa}{\pa x_j}}(v_i)
       - \textcolor{red}{\sum_{j=1}^nv_j\frac{\pa}{\pa x_j}}(u_i)
@@ -499,7 +514,7 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
     \right)\frac{\pa}{\pa x_i}
     = D_u(v) - D_v(u).
   \]
-\end{example}
+\end{proof}
 
 % \begin{proposition}\label{prop:lie_brk_smooth}
 %   Let \(M\) be a smooth manifold and \(v_1\), \(v_2\) be smooth vector fields on \(M\). Then \([v_1,v_2]\) is also a smooth vector field on \(M\).

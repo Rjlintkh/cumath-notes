@@ -6,6 +6,8 @@ This section follows Guillemin, Pollack: Chapter 4.2 Exterior Algebra.
 
 Let \(V\) be a vector space over \(\R\) and \(V^*\) its dual space.
 
+\subsection{Tensor Algebra}
+
 \begin{definition}[\emph{\(k\)-tensor}]
     A function \(T:V^k\to\R\) is a \emph{\(k\)-tensor} if it is \emph{multilinear}, i.e.\ \begin{align*}
         T_i:V&\longrightarrow\R \\
@@ -65,6 +67,8 @@ Tensors arisen in this way are particularly easy to work with.
     = T(e_{j_1},\ldots,e_{j_k}) - c_{J} = 0,
   \end{align*} for any multi-index \(J = (j_1,\ldots,j_k)\). By multilinearity, we have \(S = 0\), so \(\{T_I\}\) spans \(\bigotimes^k V^*\).
 \end{proof}
+
+\subsection{Exterior Algebra}
 
 \begin{definition}[\emph{linear \(k\)-form}]
     A \(k\)-tensor \(T\) is called a \emph{linear \(k\)-form} if it is \emph{antisymmetric}, i.e. \[
@@ -134,18 +138,18 @@ More importantly, \(T\) is a \(k\)-form if and only if \[
 \end{proof}
 
 \begin{definition}[\emph{wedge product}]
-    Let \(T\) be a \(k\)-form and \(S\) an \(l\)-form. The \emph{wedge product} \(T\wedge S\) is the \((k+l)\)-form defined by \[
-        T\wedge S = \frac{(k+l)!}{k!l!}\Alt(T\otimes S).
+    Let \(T\) be a \(k\)-form and \(S\) an \(l\)-form. The \emph{wedge product} \(T\wed S\) is the \((k+l)\)-form defined by \[
+        T\wed S = \frac{(k+l)!}{k!l!}\Alt(T\otimes S).
     \]
 \end{definition}
 
-The wedge product \(\wedge:\bigwedge^k V^*\times\bigwedge^l V^*\to\bigwedge^{k+l} V^*\) is bilinear, associative, and \emph{graded commutative}, i.e. \[
-    T\wedge S = (-1)^{kl}S\wedge T.
+The wedge product \(\wed:\bigwedge^k V^*\times\bigwedge^l V^*\to\bigwedge^{k+l} V^*\) is bilinear, associative, and \emph{graded commutative}, i.e. \[
+    T\wed S = (-1)^{kl}S\wed T.
 \]
 The associativity allows us to extend the wedge product to any finite number of forms.
 
 \begin{example}
-    Let \(f_1,f_2\in V^* = \bigwedge^1V^*\), we compute the 2-form \(\Omg = f_1\wedge f_2\).
+    Let \(f_1,f_2\in V^* = \bigwedge^1V^*\), we compute the 2-form \(\Omg = f_1\wed f_2\).
     First note that \(f_1\otimes f_2\) is a 2-tensor, and \[
         (f_1\otimes f_2)^\sgm = 
         \begin{cases}
@@ -153,7 +157,7 @@ The associativity allows us to extend the wedge product to any finite number of 
             f_2\otimes f_1 & \text{if }\sgm = (12),
         \end{cases}
     \] exhausting \(S_k = \{(1)(2),(12)\}\). Then \begin{align*}
-        \Omg(v_1,v_2)
+        f_1\wed f_2(v_1,v_2)
         &= \frac{2!}{1!1!}\Alt(f_1\otimes f_2)(v_1,v_2) \\
         &= \frac{2!}{1!1!}\frac{1}{2!}\Big[
             (-1)^{(1)(2)}(f_1\otimes f_2)(v_1,v_2) + (-1)^{(12)}(f_1\otimes f_2)(v_2,v_1)
@@ -165,7 +169,7 @@ The associativity allows us to extend the wedge product to any finite number of 
 
 \begin{example}\label{ex:wedge_one_forms}
     More generally, let \(f_1,\ldots,f_k\in V^* = \bigwedge^1V^*\), then we compute \begin{align*}
-        f_1\wedge\cdots\wedge f_k(v_1,\ldots,v_k)
+        f_1\wed\cdots\wed f_k(v_1,\ldots,v_k)
         &= \frac{k!}{1!\cdots 1!}\Alt(f_1\otimes\cdots\otimes f_k)(v_1,\ldots,v_k) \\
         &= \frac{k!}{1!\cdots 1!}\frac{1}{k!}\sum_{\sgm\in S_k}(-1)^\sgm(f_1\otimes\cdots\otimes f_k)^\sgm(v_1,\ldots,v_k) \\
         &= \sum_{\sgm\in S_k}(-1)^\sgm f_1(v_{\sgm(1)})\cdots f_k(v_{\sgm(k)})
@@ -184,7 +188,7 @@ The associativity allows us to extend the wedge product to any finite number of 
 \begin{theorem}
   Let \(\{e_1^*,\ldots,e_n^*\}\) be a basis of \(V^*\), then the set of \(k\)-forms \[
     \Big\{
-        e_{i_1}^*\wedge\cdots\wedge e_{i_k}^*\,\Big|\, 1\leq i_1<\cdots<i_k\leq n
+        e_{i_1}^*\wed\cdots\wed e_{i_k}^*\,\Big|\, 1\leq i_1<\cdots<i_k\leq n
     \Big\}
   \] constitutes a basis for \(\bigwedge^k V^*\). Hence, \[
     \dim\bigwedge^k V^* = \begin{cases}
@@ -353,7 +357,7 @@ If we take the dual, we get the dual frame of the cotangent bundle \(T^*M\) over
 
 \begin{example}
     A local frame of the exterior power bundle \(\bigwedge^k T^*M\) over \(U\) is given by \[
-        \Big\{dx_{i_1}\wedge\cdots\wedge dx_{i_k} \,\Big|\, 1\leq i_1<\cdots<i_k\leq n\Big\}.
+        \Big\{dx_{i_1}\wed\cdots\wed dx_{i_k} \,\Big|\, 1\leq i_1<\cdots<i_k\leq n\Big\}.
     \]
 \end{example}
 \section{Differential Forms}
@@ -365,7 +369,7 @@ If we take the dual, we get the dual frame of the cotangent bundle \(T^*M\) over
 
 Roughly speaking, \(\omg\) associates every \(p\in M\) a linear \(k\)-form \(\omg_p\in\bigwedge^k T_p^*M\). Locally, under a chart \((\f,U,V)\), a differential \(k\)-form \(\omg\) can be written as \[
     \omg = \sum_I \omg_I dx_I
-    = \sum_{1\leq i_1<\cdots<i_k\leq n} \omg_{i_1\cdots i_k} dx_{i_1}\wedge\cdots\wedge dx_{i_k}
+    = \sum_{1\leq i_1<\cdots<i_k\leq n} \omg_{i_1\cdots i_k} dx_{i_1}\wed\cdots\wed dx_{i_k}
 \] where \(I = \{i_1 < \cdots < i_k\}\) is a \(k\)-tuple in \(\{1,\ldots,n\}\).
 
 \begin{itemize}
@@ -376,50 +380,101 @@ Roughly speaking, \(\omg\) associates every \(p\in M\) a linear \(k\)-form \(\om
     \] because \(\bigwedge^kT_p^*M = 0\) for all \(p\in M\).
 \end{itemize}  
 
+\subsection{Wedge Product}
+
 For \(\omg\in\Omg^k(M)\) and \(\eta\in\Omg^l(M)\), we have as usual \[
-    \omg\wedge\eta
+    \omg\wed\eta
     := \frac{(k+l)!}{k!l!}\Alt(\omg\otimes\eta)\in \Omg^{k+l}(M).
 \]
 
 \begin{example}
     Under local charts, we have \begin{align*}
-        &\Big(\overbrace{dx_1 + 2dx_2}^{\Omg^1(\R^3)}\Big)\wedge\Big(\overbrace{dx_1\wedge dx_2 - dx_2\wedge dx_3 + 3dx_1\wedge dx_3}^{\Omg^2(\R^3)}\Big) \\
-        &= -dx_1\wedge dx_2\wedge dx_3 + 6dx_2\wedge dx_1\wedge dx_3 \\
-        &= -dx_1\wedge dx_2\wedge dx_3 - 6dx_1\wedge dx_2\wedge dx_3 \\
-        &= -7dx_1\wedge dx_2\wedge dx_3\in\Omg^3(M).
+        &\Big(\overbrace{dx_1 + 2dx_2}^{\Omg^1(\R^3)}\Big)\wed\Big(\overbrace{dx_1\wed dx_2 - dx_2\wed dx_3 + 3dx_1\wed dx_3}^{\Omg^2(\R^3)}\Big) \\
+        &= -dx_1\wed dx_2\wed dx_3 + 6dx_2\wed dx_1\wed dx_3 \\
+        &= -dx_1\wed dx_2\wed dx_3 - 6dx_1\wed dx_2\wed dx_3 \\
+        &= -7dx_1\wed dx_2\wed dx_3\in\Omg^3(M).
     \end{align*}
 \end{example}
 
-We have \(\omg\wedge\eta = (-1)^{kl}\eta\wedge\omg\).
+We have \(\omg\wed\eta = (-1)^{kl}\eta\wed\omg\).
 
 \subsection{Contraction}
+
+We define the following operation which relates vectors with forms, called \emph{contraction}, sometimes also called \emph{interior derivative}.
 \begin{definition}[\emph{contraction}]
-    Let \(X\) be a smooth vector field on \(M\), i.e. \(X\in\Gamma^\infty(TM)\). Define \(\iota_X:\Omg^k(M)\longrightarrow\Omg^{k-1}(M)\) by \[
-        \iota_X\omg(X_1,\ldots,X_{k-1}) = \omg(X,X_1,\ldots,X_{k-1})
-    \] for any smooth vector fields \(X_1,\ldots,X_{k-1}\in\Gamma^\infty(TM)\), i.e.\ we insert the vector field \(X\) into the first slot of \(\omg\).
+    Let \(X\in\Gamma^\infty(TM)\) be a smooth vector field, we define \(\iota_X:\Omg^k(M)\longrightarrow\Omg^{k-1}(M)\) by \[
+        (\iota_X\omg)(X_1,\ldots,X_{k-1}) = \omg(X,X_1,\ldots,X_{k-1})
+        \qquad\forall X_1,\ldots,X_{k-1}\in\Gamma^\infty(TM),
+    \] i.e.\ we insert the vector field \(X\) into the first slot of \(\omg\).
 \end{definition}
-% Contraction is sometimes called the interior derivative.
-\begin{itemize}
-    \item Clearly \(\i_X\) is linear.
-    \item Obvious, \(\i_X\circ \i_X = 0\) because \[
-        \i_X\i_X\omg(X_1,\ldots,X_{k-2})
-        = \i_X\omg(X,X_1,\ldots,X_{k-2})
-        = \omg(X,X,X_1,\ldots,X_{k-2}) = 0
-    \] by antisymmetry of \(\omg\).
-\end{itemize}
 
-\begin{example}
-    In local charts, we claim that \begin{align*}
-        \i_X(dx_{i_1}\wedge\cdots\wedge dx_{i_k})
-        = \sum (-1)^{r-1} dx_{i_r}(X)\Big(
-            dx_{i_1}\wedge\cdots\wedge\wh{dx_{i_r}}\wedge\cdots\wedge dx_{i_k}   
-        \Big)
+\begin{lemma}
+    Let \(X\in\Gamma^\infty(TM)\) be a smooth vector field, then \begin{enumerate}
+        \item \(\i_X\) is \(C^\infty(M)\)-linear in \(\omg\).
+        \item \(\i_X\) is \(C^\infty(M)\)-linear in \(X\).
+        \item \(i_X\) is \(C^\infty(M)\)-multilinear in \(X_1,\ldots,X_{k-1}\).
+        \item \(\i_X\circ \i_X = 0\).
+        \item \(i_X\) is a derivation, i.e.\ \[
+            \i_X(\omg\wed\eta) = (\i_X\omg)\wed\eta + (-1)^k\omg\wed(\i_X\eta)
+            \qquad\forall \omg\in\Omg^k(M), \eta\in\Omg^l(M).
+        \]
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item Obvious.
+        \item Follow the \(C^\infty(M)\)-multilinearity of \(\omg\).
+        \item Also follows the \(C^\infty(M)\)-multilinearity of \(\omg\).
+        \item By antisymmetry of \(\omg\), we have \[
+            \big(\i_X(\i_X\omg)\big)(X_1,\ldots,X_{k-2})
+            = (\i_X\omg)(X,X_1,\ldots,X_{k-2})
+            = \omg(X,X,X_1,\ldots,X_{k-2}) = 0.
+        \]
+        \item We compute \begin{align*}
+            \i_X(\omg\wed\eta)(X_1,\ldots,X_{k+l-1})
+            &= (\omg\wed\eta)(X,X_1,\ldots,X_{k+l-1}) \\
+            &= \frac{(k+l)!}{k!l!}\Alt(\omg\otimes\eta)(X,X_1,\ldots,X_{k+l-1}) \\
+            &= \frac{(k+l)!}{k!l!}\frac{1}{(k+l)!}\sum_{\sgm\in S_{k+l}}(-1)^\sgm(\omg\otimes\eta)^\sgm(X,X_1,\ldots,X_{k+l-1}) \\
+            &= \frac{1}{k!l!}\sum_{\sgm\in S_{k+l}}(-1)^\sgm(\omg\otimes\eta)^\sgm(X,X_1,\ldots,X_{k+l-1}) \\
+            &= (\i_X\omg)\wed\eta(X_1,\ldots,X_{k+l-1}) + (-1)^k\omg\wed(\i_X\eta)(X_1,\ldots,X_{k+l-1}).
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Under a local chart \((x_1,\ldots,x_n,U)\), we have \begin{align*}
+        \i_X(dx_{i_1}\wed\cdots\wed dx_{i_k})
+        = \sum_{r=1}^k (-1)^{r-1} dx_{i_r}(X)\Big(
+            dx_{i_1}\wed\cdots\wed\wh{dx_{i_r}}\wed\cdots\wed dx_{i_k}   
+        \Big),
     \end{align*}
-\end{example}
+    which is a sum of picking \(dx_{i_r}\) out of the wedge product and inserting \(X\) into it, with a sign depending on the position of \(dx_{i_r}\).
+\end{lemma}
+\begin{proof}
+    We use cofactor expansion \begin{align*}
+        \i_X(dx_{i_1}\wed\cdots\wed dx_{i_k})(X_1,\ldots,X_{k-1})
+        &= (dx_{i_1}\wed\cdots\wed dx_{i_k})(X,X_1,\ldots,X_{k-1}) \\
+        &= \begin{vmatrix}
+            dx_{i_1}(X) & dx_{i_1}(X_1) & \cdots & dx_{i_1}(X_{k-1}) \\
+            \vdots & \vdots & \ddots & \vdots \\
+            dx_{i_k}(X) & dx_{i_k}(X_1) & \cdots & dx_{i_k}(X_{k-1})
+        \end{vmatrix} \\
+        &= \sum_{r=1}^k (-1)^{r-1} dx_{i_r}(X)\begin{vmatrix}
+            dx_{i_1}(X_1) & \cdots & dx_{i_1}(X_{k-1}) \\
+            \vdots & \ddots & \vdots \\
+            \wh{dx_{i_r}} & \cdots & \wh{dx_{i_r}} \\
+            \vdots & \ddots & \vdots \\
+            dx_{i_k}(X_1) & \cdots & dx_{i_k}(X_{k-1})
+        \end{vmatrix} \\
+        &= \sum_{r=1}^k (-1)^{r-1} dx_{i_r}(X)\Big(
+            dx_{i_1}\wed\cdots\wed\wh{dx_{i_r}}\wed\cdots\wed dx_{i_k}(X_1,\ldots,X_{k-1})
+        \Big).
+    \end{align*}
+\end{proof}
 
 \begin{example}
-    For \(\omg = (x + y)dx\wedge dz\), \(X = y\dfrac{\pa}{\pa x}\), we have \begin{align*}
-        \i_X\omg &= (x + y)\i_X(dx\wedge dz) \\
+    For \(\omg = (x + y)dx\wed dz\), \(X = y\dfrac{\pa}{\pa x}\), we have \begin{align*}
+        \i_X\omg &= (x + y)\i_X(dx\wed dz) \\
         &= (x + y)\Bigg(
             dx\bigg(y\frac{\pa}{\pa x}\bigg)dz
             - dz\bigg(y\frac{\pa}{\pa x}\bigg)dx
@@ -428,13 +483,27 @@ We have \(\omg\wedge\eta = (-1)^{kl}\eta\wedge\omg\).
     \end{align*}
 \end{example}
 
-We have \(\i_X(\omg\wedge\eta) = (\i_X\omg)\wedge\eta + (-1)^k\omg\wedge(\i_X\eta)\).
+\begin{example}
+    For \(\omg = dx_1\wed\cdots\wed dx_n\), consider the \emph{radial vector field} \(
+        X = \sum_{i=1}^n x_i\dfrac{\pa}{\pa x_i}
+    \), we have \[
+        dx_r(X) = dx_r\Big(\sum_i x_i\frac{\pa}{\pa x_i}\Big)
+        = \sum_i x_i dx_r\Big(\frac{\pa}{\pa x_i}\Big)
+        = \sum_i x_i\delta_{ri} = x_r.
+    \] therefore \begin{align*}
+        \iota_X\omg
+        &= \sum_{r=1}^n (-1)^{r-1} dx_r(X)\Big(
+            dx_1\wed\cdots\wed\wh{dx_r}\wed\cdots\wed dx_n
+        \Big) \\
+        &= \sum_{r=1}^n (-1)^{r-1} x_r dx_1\wed\cdots\wed\wh{dx_r}\wed\cdots\wed dx_n.
+    \end{align*}
+\end{example}
 
 \newpage
 
 \subsection{Exterior Derivative}
 \begin{definition}[\emph{exterior derivative}]
-    Define \(d:\Omg^k(M)\longrightarrow\Omg^{k+1}(M)\) by \begin{align*}
+    We define \(d:\Omg^k(M)\longrightarrow\Omg^{k+1}(M)\) by \begin{align*}
         d\omg(X_1,\ldots,X_{k+1})
         &= \sum_{1\leq i\leq k+1} (-1)^{i-1}D_{X_i}\Big(\omg(X_1,\ldots,\wh{X_i},\ldots,X_{k+1})\Big) \\
         &+ \sum_{1\leq i<j\leq k+1}(-1)^{i+j}\omg\Big([X_i,X_j],X_1,\ldots,\wh{X_i},\ldots,\wh{X_j},\ldots,X_{k+1}\Big)\\
@@ -442,17 +511,25 @@ We have \(\i_X(\omg\wedge\eta) = (\i_X\omg)\wedge\eta + (-1)^k\omg\wedge(\i_X\et
     \end{align*}
     where in the second sum we take out \(X_i\) and \(X_j\) and insert their Lie bracket \([X_i,X_j]\) into the first slot of \(\omg\).
 \end{definition}
-This defining formula is very complicated, in most of the times this is useless.
+This defining formula is very complicated, in most of the times this is useless. We exhibit some special cases.
 
-We exhibit some special cases.
-\begin{example}
+\begin{example}\label{ex:ext_deriv_0_form}
     For \(f\in C^\infty(M) = \Omg^0(M)\), there is no second sum because there are no two vector fields to take the Lie bracket of, so \[
         df(X) = D_Xf.
     \]
-    Therefore, we see this \(df\) aligns with the tangent formulation of \(df_p\).
+    Under local coordinates \((x_1,\ldots,x_n,U)\), since \(df\in\Omg^1(U)\), we have \[
+        df = \sum_i \a_i\,dx_i
+    \] for some \(a_i\in C^\infty(U)\), since \(dx_i(\frac{\pa}{\pa x_j}) = \delta_{ij}\), we obtain \[
+        \a_i = \sum_i \a_i dx_i(\frac{\pa}{\pa x_i})
+        = df(\frac{\pa}{\pa x_i})
+        = \frac{\pa f}{\pa x_i}.
+    \]
+    Therefore, we see this \(df\) aligns with the tangent formulation of \[
+        df = \sum_i \frac{\pa f}{\pa x_i} dx_i.
+    \]
 \end{example}
 
-\begin{example}
+\begin{example}\label{ex:ext_deriv_1_form}
     For \(\omg\in\Omg^1(M)\), then \begin{align*}
         d\omg(X,Y) &= D_X\omg(Y) - D_Y\omg(X) \\
         &- \omg([X,Y]).
@@ -462,81 +539,111 @@ We exhibit some special cases.
 \begin{lemma}
     Let \(\omg\in\Omg^k(M)\), \(\eta\in\Omg^l(M)\). Then
     \begin{enumerate}
-        \item \emph{Linearity.} \(d\) is linear.
-        \item \emph{Derivation.} \[
-            d(\omg\wedge\eta) = d\omg\wedge\eta + (-1)^k\omg\wedge d\eta.
-        \]
-        \item \emph{Exactness.} \(d^2 = 0\), i.e. \(d(d\omg) = 0\).
-        \item \emph{Functoriality.}
+        \item \(d\) is linear over \(\R\).
+        \item \emph{Derivation.} \(
+            d(\omg\wed\eta) = d\omg\wed\eta + (-1)^k\omg\wed d\eta
+        \).
+        \item \(d\circ d = 0\).
     \end{enumerate}
 \end{lemma}
 \begin{proof}
     \begin{enumerate}
-        \item Obvious.
+        \item Omitted.
         \item Check for \(0\)-form \(f\in C^\infty(M)\), we have \begin{align*}
             d(df)(X,Y) &= D_X df(Y) - D_Y df(X) \\
             &- df\Big([X,Y]\Big) \\
             &= D_XD_Y f - D_YD_X f - D_{[X,Y]}f = 0
         \end{align*} by the definition of the Lie bracket.
 
-        For \(k > 0\), assume \(\omg = f dx_1\wedge\cdots\wedge dx_k\), then \begin{align*}
-            d\omg &= df\wedge dx_1\wedge\cdots\wedge dx_k \\
-            d(d\omg) &= d(df)\wedge dx_1\wedge\cdots\wedge dx_k \\
-            &- \sum_i df\wedge\cdots\wedge d(dx_i)\wedge\cdots\wedge dx_k = 0
+        For \(k > 0\), assume \(\omg = f dx_1\wed\cdots\wed dx_k\), then \begin{align*}
+            d\omg &= df\wed dx_1\wed\cdots\wed dx_k \\
+            d(d\omg) &= d(df)\wed dx_1\wed\cdots\wed dx_k \\
+            &- \sum_i df\wed\cdots\wed d(dx_i)\wed\cdots\wed dx_k = 0
         \end{align*}
     \end{enumerate}
 \end{proof}
 
-The \emph{exactness} is very important, as the beginning of the \emph{de Rham's theory}.
+The property \(d^2 = 0\) is very important, as the beginning of the \emph{de Rham's theory}.
 
-\newpage
 \begin{lemma}
-    Under a local chart, then \[
-        d\bigg(\sum_I \omg_I\,dx_I\bigg)
+    Under a local chart \((x_1,\ldots,x_n,U)\), we have \[
+        d\Big(\sum_I \omg_I\,dx_I\Big)
         = \sum_I d\omg_I\wed dx_I.
     \]
 \end{lemma}
 \begin{proof}
-    
+    By linearity, it suffices to show for \(f\in\Omg^0(M)\), \[
+        d(f\,dx_I) = df\wed dx_I.
+    \]
+    It suffices to show agreement on any \(k+1\) fields in the local frame, pick \(\sgm\in S_n\) and put \[
+        X_1 = \frac{\pa}{\pa x_{\sgm(1)}},\ldots,X_{k+1} = \frac{\pa}{\pa x_{\sgm(k+1)}}.
+    \]
+    From Example~\ref{ex:lie_brk_mixed_deriv}, we have \([X_i,X_j] = 0\) for all \(i,j\). Also, since \[
+        dx_I\bigg(\frac{\pa}{\pa x_{\sgm(1)}},\ldots,\wh{\frac{\pa}{\pa x_{\sgm(r)}}},\ldots,\frac{\pa}{\pa x_{\sgm(k+1)}}\bigg) 
+    \] is a constant, the left hand side becomes \begin{align*}
+        d(f\,dx_I)(X_1,\ldots,X_{k+1})
+        &= \sum_{1\leq r\leq k+1} (-1)^{r-1}D_{X_r}\Big((f\,dx_I)(X_1,\ldots,\wh{X_r},\ldots,X_{k+1})\Big) \\
+        &= \sum_{1\leq r\leq k+1} (-1)^{r-1}(D_{X_r}f)dx_I(X_1,\ldots,\wh{X_r},\ldots,X_{k+1}).
+    \end{align*}
+    For the right hand side, we use cofactor expansion to get \begin{align*}
+        df\wed dx_I(X_1,\ldots,X_{k+1})
+        &= \begin{vmatrix}
+            df(X_1) & \cdots & df(X_{k+1}) \\
+            dx_{i_1}(X_1) & \cdots & dx_{i_1}(X_{k+1}) \\
+            \vdots & \ddots & \vdots \\
+            dx_{i_k}(X_1) & \cdots & dx_{i_k}(X_{k+1})
+        \end{vmatrix} \\
+        &= \sum_{r=1}^{k+1}(-1)^{r-1}df(X_r)\begin{vmatrix}
+            dx_{i_1}(X_1) & \cdots & \wh{dx_{i_1}(X_r)} & \cdots & dx_{i_1}(X_{k+1}) \\
+            \vdots & \ddots & \vdots & \ddots & \vdots \\
+            dx_{i_k}(X_1) & \cdots & \wh{dx_{i_k}(X_r)} & \cdots & dx_{i_k}(X_{k+1})
+        \end{vmatrix} \\
+        &= \sum_{r=1}^{k+1}(-1)^{r-1}(D_{X_r}f)dx_I(X_1,\ldots,\wh{X_r},\ldots,X_{k+1}).
+    \end{align*}
 \end{proof}
 
-\begin{example}
-    In local charts, suppose \[
-        \omg = \sum_I \omg_{i_1,\ldots,i_k} dx_{i_1}\wedge\cdots\wedge dx_{i_k},
-    \] define \[
-        d\omg = \sum_I d(\omg_{i_1,\ldots,i_k})\wedge dx_{i_1}\wedge\cdots\wedge dx_{i_k}.
-    \]
-    For \(f\in C^\infty(M) = \Omg^0(M)\), define \[
-        df = \sum_i \frac{\pa f}{\pa x^i} dx^i.
-    \]
-    Check at home that those two definitions are consistent with the previous ones.
-\end{example}
+\newpage
 
 \begin{example}
     In \(M = \R^3\), \begin{enumerate}
-        \item For \(f\in\Omg^0(M)\), we have \[
-            df = \frac{\pa f}{\pa x}dx + \frac{\pa f}{\pa y}dy + \frac{\pa f}{\pa z}dz,
-        \] we recover \[
-            \operatorname{grad} f = \nabla f = \<\frac{\pa f}{\pa x}, \frac{\pa f}{\pa y}, \frac{\pa f}{\pa z}\>.
+        \item For \(f\in C^\infty(M) = \Omg^0(M)\), from Example~\ref{ex:ext_deriv_1_form} we have \[
+            df = \frac{\pa f}{\pa x}\,dx + \frac{\pa f}{\pa y}\,dy + \frac{\pa f}{\pa z}\,dz\in\Omg^1(M),
+        \] recovering under \(F\xmapsto{\flat} F_1\,dx + F_2\,dy + F_3\,dz\) \[
+            \operatorname{grad} f = \nabla f = \Big\<\frac{\pa f}{\pa x}, \frac{\pa f}{\pa y}, \frac{\pa f}{\pa z}\Big\>\in \Gamma^\infty(TM).
         \]
-        \item For \(\omg = F_1dx + F_2dy + F_3dz\), we have \begin{align*}
-            d\omg &= dF_1\wedge dx + dF_2\wedge dy + dF_3\wedge dz \\
-            &= (\frac{\pa F_1}{\pa x}dx + \frac{\pa F_1}{\pa y}dy + \frac{\pa F_1}{\pa z}dz)\wedge dx
-            + \text{other 6 terms} \\
-            &= (\frac{\pa F_3}{\pa y} - \frac{\pa F_2}{\pa z})dy\wedge dz
-            + (\frac{\pa F_1}{\pa z} - \frac{\pa F_3}{\pa x})dz\wedge dx
-            + (\frac{\pa F_2}{\pa x} - \frac{\pa F_1}{\pa y})dx\wedge dy,
-        \end{align*} we recover \[
-            \operatorname{curl} \vec{F} = \nabla\times\vec{F} = \<\frac{\pa F_3}{\pa y} - \frac{\pa F_2}{\pa z}, \frac{\pa F_1}{\pa z} - \frac{\pa F_3}{\pa x}, \frac{\pa F_2}{\pa x} - \frac{\pa F_1}{\pa y}\>.
+        \item For \(\vec{F} = \begin{pmatrix}
+            F_1 \\ F_2 \\ F_3
+        \end{pmatrix}\in \Gamma^\infty(TM)\), put \(\omg = F_1\,dx + F_2\,dy + F_3\,dz\in\Omg^1(M)\), we have \begin{align*}
+            d\omg &= dF_1\wed dx + dF_2\wed dy + dF_3\wed dz \\
+            &= \Big(\frac{\pa F_1}{\pa x}\,dx + \textcolor{blue}{\frac{\pa F_1}{\pa y}\,dy} + \textcolor{blue}{\frac{\pa F_1}{\pa z}\,dz}\Big)\wed dx \\
+            &+ \Big(\textcolor{blue}{\frac{\pa F_2}{\pa x}\,dx} + \frac{\pa F_2}{\pa y}\,dy + \textcolor{blue}{\frac{\pa F_2}{\pa z}\,dz}\Big)\wed dy \\
+            &+ \Big(\textcolor{blue}{\frac{\pa F_3}{\pa x}\,dx} + \textcolor{blue}{\frac{\pa F_3}{\pa y}\,dy} + \frac{\pa F_3}{\pa z}\,dz\Big)\wed dz \\
+            &= \Big(\frac{\pa F_3}{\pa y} - \frac{\pa F_2}{\pa z}\Big)dy\wed dz
+            + \Big(\frac{\pa F_1}{\pa z} - \frac{\pa F_3}{\pa x}\Big)dz\wed dx
+            + \Big(\frac{\pa F_2}{\pa x} - \frac{\pa F_1}{\pa y}\Big)dx\wed dy,
+        \end{align*} recovering under \(F\xmapsto{\b}\iota_F(dx\wed dy\wed dz)\) that \[
+            \operatorname{curl} \vec{F} = \nabla\times\vec{F} = \Big\<\frac{\pa F_3}{\pa y} - \frac{\pa F_2}{\pa z}, \frac{\pa F_1}{\pa z} - \frac{\pa F_3}{\pa x}, \frac{\pa F_2}{\pa x} - \frac{\pa F_1}{\pa y}\Big\>\in \Gamma^\infty(TM).
         \]
-        \item For \(\omg = F_1 dy\wedge dz + F_2 dz\wedge dx + F_3 dx\wedge dy\in \Omg^2(M)\), then \begin{align*}
-            d\omg &= dF_1\wedge dy\wedge dz + dF_2\wedge dz\wedge dx + dF_3\wedge dx\wedge dy \\
-            &= \frac{\pa F_1}{\pa x}dx\wedge dy\wedge dz + \frac{\pa F_2}{\pa y}dy\wedge dz\wedge dx + \frac{\pa F_3}{\pa z}dz\wedge dx\wedge dy \\
-            &= (\frac{\pa F_1}{\pa x} + \frac{\pa F_2}{\pa y} + \frac{\pa F_3}{\pa z})dx\wedge dy\wedge dz,
-        \end{align*} we recover \[
-            \operatorname{div} \vec{F} = \nabla\cdot\vec{F} = \frac{\pa F_1}{\pa x} + \frac{\pa F_2}{\pa y} + \frac{\pa F_3}{\pa z}.
+        \item For \(\vec{F} = \begin{pmatrix} F_1 \\ F_2 \\ F_3 \end{pmatrix}\in \Gamma^\infty(TM)\), put \(\omg = F_1 dy\wed dz + F_2 dz\wed dx + F_3 dx\wed dy\in\Omg^1(M)\), we have \begin{align*}
+            d\omg &= dF_1\wed dy\wed dz + dF_2\wed dz\wed dx + dF_3\wed dx\wed dy \\
+            &= \Big(\textcolor{blue}{\frac{\pa F_1}{\pa x}dx} + \frac{\pa F_2}{\pa y}dy + \frac{\pa F_3}{\pa z}dz\Big)\wed dy\wed dz \\
+            &+ \Big(\frac{\pa F_1}{\pa x}dx + \textcolor{blue}{\frac{\pa F_2}{\pa y}dy} + \frac{\pa F_3}{\pa z}dz\Big)\wed dz\wed dx \\
+            &+ \Big(\frac{\pa F_1}{\pa x}dx + \frac{\pa F_2}{\pa y}dy + \textcolor{blue}{\frac{\pa F_3}{\pa z}dz}\Big)\wed dx\wed dy
+            = \Big(\frac{\pa F_1}{\pa x} + \frac{\pa F_2}{\pa y} + \frac{\pa F_3}{\pa z}\Big)dx\wed dy\wed dz\in\Omg^3(M),
+        \end{align*} recovering under \(f \xmapsto{*} f\,dx\wed dy\wed dz\) that \[
+            \operatorname{div} \vec{F} = \nabla\cdot\vec{F} = \frac{\pa F_1}{\pa x} + \frac{\pa F_2}{\pa y} + \frac{\pa F_3}{\pa z}\in C^\infty(M).
         \]
     \end{enumerate}
+    The relationships between the exterior derivative and the classical differential operators are summarized by the commutative diagram
+    \[
+        \begin{tikzcd}
+            C^\infty(\R^3) \ar{r}{\nabla} \ar{d}{\id}
+            & \Gamma^\infty(T\R^3) \ar{r}{\nabla\times} \ar{d}{\flat}
+            & \Gamma^\infty(T\R^3) \ar{r}{\nabla\cdot} \ar{d}{\b}
+            & C^\infty(\R^3) \ar{d}{*} \\
+            \Omg^0(\R^3) \ar{r}{d} & \Omg^1(\R^3) \ar{r}{d} & \Omg^2(\R^3) \ar{r}{d} & \Omg^3(\R^3)
+        \end{tikzcd}.
+    \]
 \end{example}
 
 \subsection{Pullback}
@@ -554,22 +661,22 @@ We recall the \emph{pushforward} and \emph{pullback} for a smooth map \(\f:M\lon
 \end{itemize}
 
 \begin{definition}[\emph{pullback of differential forms}]
-    Let \(\f:M\longrightarrow N\) be a smooth map, for \(\omg\in\Omg^k(N)\), we define the \emph{pullback} \(\f^*\omg\in\Omg^k(M)\) pointwisely by \[
+    Let \(\f:M\longrightarrow N\) be a smooth map, for \(\omg\in\Omg^k(N)\), we define the \emph{pullback} \(\f^*:\Omg^k(N) \longrightarrow \Omg^k(M)\) pointwisely by \[
         (\f^*\omg)_p(X_1,\ldots,X_k)
         = \omg_{\f(p)}\Big(d\f_p(X_1|_p),\ldots,d\f_p(X_k|_p)\Big)
         % = \omg_{\f(p)}\left(
         %     (\f_* X_1)|_{\f(p)},\ldots,(\f_* X_k)|_{\f(p)}
         % \right)
-        \quad\forall p\in M,\ X_1,\ldots,X_k\in T_pM.
+        \quad\forall p\in M,\ X_1,\ldots,X_k\in \Gamma^\infty(TM).
     \]
 \end{definition}
 
 \begin{lemma}\label{lem:pullback_forms_prop}
     Let \(\f:M\longrightarrow N\) be a smooth map, then:
     \begin{enumerate}
-        \item \emph{Linearity:} \(\f^*:\Omg^k(N) \to \Omg^k(M)\) is linear.
-        \item \emph{Multiplicativity:} \(\f^*(\omg\wedge\eta) = \f^*\omg\wedge\f^*\eta\).
-        \item \emph{Functoriality:} Given \(
+        \item \(\f^*\omg\) is \(\R\)-linear in \(\omg\).
+        \item \emph{Multiplicativity:} \(\f^*(\omg\wed\eta) = \f^*\omg\wed\f^*\eta\).
+        \item \emph{Functoriality:} Given smooth maps \(
             M\xlongrightarrow{\f} N \xlongrightarrow{\psi} P,
         \) we have \[
             (\psi\circ\f)^* = \f^*\circ\psi^*.
@@ -580,19 +687,22 @@ We recall the \emph{pushforward} and \emph{pullback} for a smooth map \(\f:M\lon
 \begin{proof}
     \begin{enumerate}
         \item Obvious.
+        \item Omitted.
+        \item Follows the chain rule.
+        \item Follows the functoriality.
     \end{enumerate}
 \end{proof}
-\newpage
+
 \begin{lemma}\label{lem:pullback_forms_local}
     Let \(\f:M\longrightarrow N\) be a smooth map under a local chart, then \[
-        \f^*\bigg(\sum_I \omg_I\,dx_{i_1}\wedge\cdots\wedge dx_{i_k}\bigg)
-        = \sum_I (\omg_I\circ\f)\,d(x_{i_1}\circ\f)\wedge\cdots\wedge d(x_{i_k}\circ\f).
+        \f^*\Big(\sum_I\omg_I\,dx_{i_1}\wed\cdots\wed dx_{i_k}\Big)
+        = \sum_I(\omg_I\circ\f)\,d(x_{i_1}\circ\f)\wed\cdots\wed d(x_{i_k}\circ\f).
     \]
 \end{lemma}
 \begin{proof}
     Under the local chart, we have \begin{align*}
-        \f^*\bigg(\sum_I \omg_I\,dx_{i_1}\wedge\cdots\wedge dx_{i_k}\bigg) 
-        &= \sum_I \f^*\omg_I \wedge \f^*(dx_{i_1})\wedge\cdots\wedge \f^*(dx_{i_k}).
+        \f^*\bigg(\sum_I \omg_I\,dx_{i_1}\wed\cdots\wed dx_{i_k}\bigg) 
+        &= \sum_I \f^*\omg_I \wed \f^*(dx_{i_1})\wed\cdots\wed \f^*(dx_{i_k}).
     \end{align*}
     and by naturality, we have \begin{align*}
         \f^*(dx_i) = d(\f^* x_i) = d(x_i\circ\f).
@@ -617,20 +727,20 @@ This lemma tells us that pullback is basically a change of variables by setting 
 
 \begin{example}
     Let \(\f:\R^2\longrightarrow\R^2\) be given by \[
-        (r,\t) \longmapsto (\underset{x}{r\cos\t}, \underset{y}{r\sin\t}).
+        (r,\t) \longmapsto (\underset{x}{r\cos{\t}}, \underset{y}{r\sin{\t}}).
     \]
-    Given \(\omg = dx\wedge dy\), we compute \(\f^*\omg\) as \begin{align*}
-        \f^*(dx\wedge dy)
-        &= d(r\cos\t)\wedge d(r\sin\t) \\
-        &= \Big(\cos\t dr - r\sin\t d\t\Big) \wedge \Big(\sin\t dr + r\cos\t d\t\Big) \\
-        &= rdr\wedge d\t.
+    Given \(\omg = dx\wed dy\), we compute \(\f^*\omg\) as \begin{align*}
+        \f^*(dx\wed dy)
+        &= d(r\cos\t)\wed d(r\sin\t) \\
+        &= \Big(\cos\t dr - r\sin\t d\t\Big) \wed \Big(\sin\t dr + r\cos\t d\t\Big)
+        = rdr\wed d\t.
     \end{align*}
 \end{example}
 
 \begin{lemma}[Pullback for Top Forms]\label{lem:pullback_top_forms}
     Let \(\f:M\longrightarrow N\) be a smooth map. Under local charts \((x_1,\ldots,x_n,U)\) of \(M\) and \((y_1,\ldots,y_n,V)\) of \(N\), for any \(g\in C^\infty(V)\), we have \[
         \f^*(g\,dy_1\wed\cdots\wed dy_n)
-        = (g\circ\f)\det(d\f)\,dx_1\wed\cdots\wed dx_n.
+        = (g\circ\f)\det\left(\frac{\pa\f_i}{\pa x_j}\right)\,dx_1\wed\cdots\wed dx_n.
     \]
 \end{lemma}
 \begin{proof}
@@ -640,69 +750,69 @@ This lemma tells us that pullback is basically a change of variables by setting 
             \vdots \\
             \f_n
         \end{pmatrix}
-    \] By Lemma \ref{lem:pullback_forms_local}, we have \begin{align*}
+    \] By Lemma~\ref{lem:pullback_forms_local}, we have \begin{align*}
         \f^*\bigg(g\,dy_1\wed\cdots\wed dy_n\bigg)
         &= (g\circ\f)\,d\f_1\wed\cdots\wed d\f_n. 
     \end{align*}
-    By Example \ref{ex:wedge_one_forms}, we have \begin{align*}
+    By Example~\ref{ex:wedge_one_forms}, we have \begin{align*}
         d\f_1\wed\cdots\cdots\wed d\f_n\Big(\frac{\pa}{\pa x_1},\ldots,\frac{\pa}{\pa x_n}\Big)
-        = \det(d\f_i(\frac{\pa}{\pa x_j})) = \det(\frac{\pa\f_i}{\pa x_j}) = \det(d\f).
+        = \det(d\f_i\left(\frac{\pa}{\pa x_j}\right))
+        = \det\left(\frac{\pa\f_i}{\pa x_j}\right).
     \end{align*}
 \end{proof}
 
 \subsection{Lie Derivative}
 
-\begin{definition}[\emph{Lie derivative of forms}]
-    Define \(\L_X:\Omg^k\longrightarrow\Omg^k\) by the following.
-    Given \(\omg\in\Omg^k(M)\), \begin{itemize}
-        \item if \(X\) is a vector field, we can find an integral curve \(\phi_t:M\longrightarrow M\), then \[
-            \L_X\omg := \frac{d}{dt}\bigg|_{t=0} \phi_t^*\omg.
-        \]
-    \end{itemize}
+\begin{definition}[\emph{Lie derivative for forms}]
+    Let \(X\in\Gamma^\infty(TM)\) be a smooth vector field, for each \(p\in M\), choose a local flow \(\phi_t:(-\eps,\eps)\longrightarrow M\), we define \(\L_X:\Omg^k(M)\longrightarrow\Omg^k(M)\) pointwisely by \[
+        (\L_X\omg)_p := \frac{d}{dt}\bigg|_{t=0} (\phi_t^*\omg)_p.
+    \]
 \end{definition}
-
-In particular, locally \begin{align*}
-    \phi_t^*\omg &= \sum f_I(t) dx_{i_1}\wedge\cdots\wedge dx_{i_k} \\
-    \L_X\omg &= \sum f_I'(0) dx_{i_1}\wedge\cdots\wedge dx_{i_k}.
-\end{align*}
 
 \begin{lemma} For a \(k\)-form \(\omg\) and a smooth vector field \(X\), we have
     \begin{enumerate}
-        \item \(d\L_X\omg = \L_Xd\omg\).
-        \item \(\L_X(\omg\times\eta) = \L_X\omg\wedge\eta + \omg\wedge\L_X\eta\).
+        \item \(\L_X\omg\) is linear in \(\omg\).
+        \item \(\L_X\omg\) is linear in \(X\).
+        \item \emph{Naturality}: \(d(\L_X\omg) = \L_X(d\omg)\).
+        \item \(\L_X(\omg\wed\eta) = (\L_X\omg)\wed\eta + \omg\wed(\L_X\eta)\).
     \end{enumerate}
+\end{lemma}
+
+\begin{lemma}
+Under a local chart, we have \begin{align*}
+    \phi_t^*\omg &= \sum f_I(t) dx_{i_1}\wed\cdots\wed dx_{i_k} \\
+    \L_X\omg &= \sum f_I'(0) dx_{i_1}\wed\cdots\wed dx_{i_k}.
+\end{align*}
 \end{lemma}
 
 When free of coordinates, Lie derivative is easier to compute, but when you have coordinates, it is easier to compute the Lie derivative by using Cartan's magic formula.
 \begin{theorem}[Cartan's magic formula]
     \[
-        \L_X\omg = d\i_X\omg + \i_Xd\omg.
+        \L_X\omg = d(\i_X\omg) + \i_X(d\omg).
     \]
 \end{theorem}
 \begin{proof}
     We use induction.
     \begin{itemize}
         \item True for \(0\)-form, \(\omg = f\in\Omg^0(M)\), \[
-            \L_Xf = df(X) = \i_Xdf.
+            \L_Xf = D_Xf =  df(X) = \i_Xdf.
         \]
-        \item Suppose the formula is true for \(k-1\)-forms, then by linearity, it suffices to check \[
-            \omg = fdx_1\wedge\cdots\wedge dx_k.
+        \item Suppose the formula is true for \((k-1)\)-forms, then by linearity, it suffices to check for \[
+            \omg = f\,dx_1\wed\cdots\wed dx_k
+            = dx_1 \wed \underbrace{f\,dx_2\wed\cdots\wed dx_k}_{\omg_1}.
         \]
-        We rewrite it as \[
-            \omg = dx_1 \wedge \underbrace{f dx_2\wedge\cdots\wedge dx_k}_{\omg_1}.
-        \]
-        First of all \[
-            \mathrm{LHS} = \L_X\omg = \L_X dx_1\wedge\omg_1 + dx_1\wedge\L_X\omg_1.
+        For the left hand side, we have \[
+            \L_X\omg = \textcolor{blue}{\L_X dx_1\wed\omg_1} + \textcolor{red}{dx_1\wed\L_X\omg_1}.
         \]
         By Lebniz's rule, we have \begin{align*}
-            \mathrm{RHS} &= d\i_X(dx_1\wedge \omg_1) + \i_Xd(dx_1\wedge\omg_1) \\
+            d\i_X\omg + \i_X\omg &= d\i_X(dx_1\wed \omg_1) + \i_Xd(dx_1\wed\omg_1) \\
             &= d\Big(
-                \i_X dx_1\wedge\omg_1 - dx_1\wedge\i_X\omg_1    
+                \i_X dx_1\wed\omg_1 - dx_1\wed\i_X\omg_1    
             \Big) - \i_X\Big(
-                dx_1\wedge d\omg_1    
+                dx_1\wed d\omg_1    
             \Big) \\
-            &= d(\i_X dx_1)\wedge\omg_1 + \i_X dx_1\wedge d\omg_1 + dx_1\wedge d\i_X\omg_1 \\
-            &- \i_X dx_1\wedge d\omg_1 + dx_1\wedge\i_X d\omg_1
+            &= d(\i_X dx_1)\wed\omg_1 + \i_X dx_1\wed d\omg_1 + dx_1\wed d\i_X\omg_1 \\
+            &- \i_X dx_1\wed d\omg_1 + dx_1\wed\i_X d\omg_1
         \end{align*}
     \end{itemize}
 \end{proof}
