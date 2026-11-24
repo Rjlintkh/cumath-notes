@@ -5,25 +5,23 @@
 
 \begin{definition}[\emph{charts}]
   Let \(M\) be a topological space, a \emph{chart} on \(M\) is a tuple \((\varphi,U,V)\) where \begin{itemize}
-    \item \(\varphi:U\to V\) is a homeomorphism, and
+    \item the \emph{coordinate map} \(\varphi:U\to V\) is a homeomorphism, and
     \item \(U\) is an open subset of \(M\), and
     \item \(V\) is an open subset of \(\R^n\) for some \(n\).
   \end{itemize}
+  \begin{center}
+    \input{figures/chart.tikz}
+  \end{center}
+  If we want to emphasize the coordinates, we write \[
+    \varphi = (x_1,\ldots,x_n):U\longrightarrow V\subset\R^n,
+  \] i.e.\ \(x_i = \pi_i\circ\varphi\) is the \(i\)-th coordinate function, where \(\pi_i:\R^n\to\R\) is the projection map onto the \(i\)-th coordinate. Then we denote the chart by \((U,x_1,\ldots,x_n)\).
   % We say \((\f,U,V)\) is \emph{centered at \(p\)} if \(p\in U\) and \(\f(p) = 0\).
-\end{definition}
-
-\begin{center}
-  \input{figures/chart.tikz}
-\end{center}
-
-\begin{definition}[locally Euclidean spaces]
-  Let \(M\) be a topological space, we say \(M\) is \emph{locally Euclidean} if for each \(p\in M\), there exists a chart \((\varphi,U,V)\) with \(p\in U\).
 \end{definition}
 
 \begin{definition}[topological manifolds]
  Let \(M\) be a topological space, we say \(M\) is a \emph{topological manifold} if \begin{itemize}
   \item \(M\) is Hausdorff and second countable, and
-  \item \(M\) is locally Euclidean.
+  \item \(M\) is \emph{locally Euclidean}, i.e.\ for each \(p\in M\), there exists a chart \((\varphi,U,V)\) with \(p\in U\).
  \end{itemize}
 \end{definition}
 Second countability permits partition of unity, to extend local constructions to global ones.
@@ -237,18 +235,18 @@ The following example shows that two non-equivalent atlases can still be diffeom
 \end{example}
 
 Below are some remarkable results, but beyond the scope of this course. In case you are interested, you can further investigate that in the final project.
-\begin{project}[Milnor-Kervaire]
+\begin{proposition}[Milnor-Kervaire]
   Any topological space homeomorphic to \(\S^7\) admits 28 non-diffeomorphic smooth structures, which are called \emph{exotic spheres}.
-\end{project}
+\end{proposition}
 
 The next result is from two Fields medalists.
-\begin{project}[Donaldson-Freedman]
+\begin{proposition}[Donaldson-Freedman]
   For \(n\neq 4\), \(\R^n\) admits a unique smooth structure up to diffeomorphism, while \(\R^4\) admits uncountably many non-diffeomorphic smooth structures.
-\end{project}
+\end{proposition}
 
-\begin{project}[Munkres-Moise]
+\begin{proposition}[Munkres-Moise]
   If \(\dim M\leq 3\), then \(M\) has a unique smooth structure up to diffeomorphism.
-\end{project}
+\end{proposition}
 
 From now on, we refer to a smooth manifold simply by \(M\), and we always assume the smooth structure is fixed.
 
@@ -498,7 +496,7 @@ In general, if \((\f_1,U_1,V_1)\) and \((\f_2,U_2,V_2)\) are two charts centered
   \]
 
 Since \((d\f_1)_p\) is a bijection, we can identify \(T_p M\simeq\R^m\) through \[
-    T_pM \xlongrightarrow{(d\f_1)_p} T_0V_1 \xlongrightarrow{\Phi_\id} \R^m,
+    T_pM \xrightarrow[\hspace{2em}]{(d\f_1)_p} T_0V_1 \xrightarrow[\hspace{2em}]{\Phi_\id} \R^m,
 \] and equip \(T_pM\) with a vector space structure such that \(T_pM\xlongrightarrow{(d\f_1)_p} T_0V_1\) is linear. Note that since the Jacobian \((d\f_{12})_0\) is a linear isomorphism, the linearity of \((d\f_2)_p\) is equivalent to the linearity of \((d\f_1)_p\).
 
 \begin{theorem}[Chain rule]
@@ -553,16 +551,16 @@ The following is an analogy of the Jacobian being invertible for a diffeomorphis
   Let \(f:S^1\to S^1\) be the doubling map \(e^{i\theta}\mapsto e^{i2\theta}\). Here \(f\) is a local diffeomorphism, but not a global diffeomorphism.
 \end{example}
 
-Now, since we have fully identified \(T_pM\) with \(\R^m\), we can drop the identification maps and directly consider \(T_pM\) as a vector space.
+Now, since we have fully identified \(T_pM\) with \(\R^m\), we can drop the identification maps and directly consider \(T_pM\) as a vector space, then \(df_p\) is a \(\R\)-linear map.
 
 \begin{proposition}[Basis for \(T_pM\)]
-  Let \(M\) be a smooth manifold under a smooth chart \((\varphi,U,V)\). If \(\{x_1,\ldots,x_m\}\) constitutes a basis of \(\R^m\), then \[
+  Let \(M\) be a smooth manifold under a smooth chart \((\varphi,U,V)\). If \(\{e_1,\ldots,e_m\}\) constitutes a basis of \(\R^m\), then \[
     \left\{
       \dfrac{\pa}{\pa x_1}\bigg|_p, \ldots, \dfrac{\pa}{\pa x_m}\bigg|_p
     \right\},
     \quad\text{where}\quad
     \frac{\pa}{\pa x_i}\bigg|_p
-    := (d\f_p)^{-1}(x_i),
+    := (d\f_p)^{-1}(e_i),
   \] constitutes a basis for \(T_pM\).
 \end{proposition}
 \begin{proof}
@@ -573,43 +571,20 @@ Consequently, a vector \(v\in T_pM\) can be written \[
   v = \sum_{i=1}^m v_i \frac{\pa}{\pa x_i}\bigg|_p,
 \] where \(v_i\in\R\) are the components of \(v\).
 
-We call each \(\dfrac{\pa}{\pa x_i}\bigg|_p\) the \emph{\(i\)-th partial derivative}, it enjoys the property that \begin{align*}
+We call each \(\dfrac{\pa}{\pa x_i}\bigg|_p\) the \emph{\(i\)-th partial derivative}, it enjoys the property that 
+% \begin{align*}
+%   df_p\bigg(\frac{\pa}{\pa x_i}\bigg|_p\bigg)
+%   = d((f\circ\f^{-1})\circ\f)_p
+%   = d(f\circ\f^{-1})_{\f(p)}(d\f_p\bigg(\frac{\pa}{\pa x_i}\bigg|_p\bigg))
+%   = d(f\circ\f^{-1})_{\f(p)}(e_i)
+% \end{align*}
+\begin{align*}
   df_p\bigg(\frac{\pa}{\pa x_i}\bigg|_p\bigg)
-  = df_p\big((d\f_p)^{-1}(x_i)\big)
-  = d(f\circ\f^{-1})_{\f(p)}(x_i)
-  = D(f\circ\f^{-1})(\f(p))\cdot x_i
+  = df_p\big((d\f_p)^{-1}(e_i)\big)
+  = d(f\circ\f^{-1})_{\f(p)}(e_i)
+  = D(f\circ\f^{-1})(\f(p))\cdot e_i
   = \frac{\pa f}{\pa x_i}\bigg|_{x=p}.
 \end{align*}
-
-% \begin{example}\label{ex:diff_partial_grad}
-%   Let \(f:\R^m\to\R\) be a smooth map and \(p\in\R^m\) under the global charts \((\varphi = \id,\R^m,\R^m)\) and \((\psi = \id,\R,\R)\) respectively. Then by Example~\ref{ex:diff_grad} we have \begin{align*}
-%     df_p\left(\frac{\pa}{\pa x_i}\bigg|_p\right)
-%     = df_p(\Phi_\varphi^{-1}(\e_i))
-%     = \Phi_\psi^{-1}\Big(\nabla f(p)\e_i\Big)
-%     = \Phi_\psi^{-1}\left(
-%       \frac{\pa f}{\pa x_i}\bigg|_{x = p}
-%     \right),
-%   \end{align*} which wraps the \(i\)-th partial derivative of \(f\) at \(p\).
-% \end{example}
-
-% \begin{example}
-%   Let \(F:\R^m\to\R^n\) be a smooth map and \(p\in\R^m\), \(F(p)\in\R^n\) under the global charts \((\varphi = \id,\R^m,\R^m)\) and \((\psi = \id,\R^n,\R^n)\) respectively. Then by Example~\ref{ex:diff_jacobian} we have \begin{align*}
-%     dF_p\left(\frac{\pa}{\pa x_i}\bigg|_p\right)
-%     = dF_p\left(\Phi_\varphi^{-1}(\e_i)\right)
-%     = \Phi_\psi^{-1}\Big(DF(p)\e_i\Big)
-%     = \Phi_\psi^{-1}\left(
-%       \frac{\pa F}{\pa x_i}\bigg|_{x=p}
-%     \right),
-%   \end{align*} which wraps the \(i\)-th column of the Jacobian of \(F\) at \(p\).
-% \end{example}
-
-% If \(\dim M = 1\), we write \(\dfrac{d}{dx}\bigg|_p := \dfrac{\pa}{\pa x_1}\bigg|_p\) for the unique basic element of \(T_pM\).
-
-% From now on, we omit writting \(\Phi_\varphi^{-1}\) and \(\Phi_\psi^{-1}\) when we identify \(T_pM\longleftrightarrow\R^m\) and \(T_{f(p)}N\longleftrightarrow\R^n\), we abuse notations to mean \[
-%   dF_p = DF(p),
-%   \quad
-%   dF_p\left(\frac{\pa}{\pa x_i}\bigg|_p\right) = \frac{\pa F}{\pa x_i}\bigg|_{x=p}.
-% \]
 
 \section{Submersion and Immersion}
 

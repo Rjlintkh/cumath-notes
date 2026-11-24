@@ -297,7 +297,7 @@ Recall for a smooth map \(f:M\longrightarrow\R\) on a smooth manifold \(M\), we 
 For a vector field \(v\) on \(M\), we have the an operator \(D_v\) analogous to the directional derivative.
 \begin{definition}
   Let \(M\) be a smooth manifold and \(v\) be a vector field on \(M\). Then we define \(D_v f:M\longrightarrow T_{f(p)}\R\simeq\R\) by \[
-    D_v f(p) = df_p(v_p)
+    D_v f(p) = df_p(v_p).
   \]
 \end{definition}
 
@@ -310,10 +310,10 @@ For a vector field \(v\) on \(M\), we have the an operator \(D_v\) analogous to 
 \end{example}
 
 \begin{example}
-  Put \(M = U\) open in \(\R^n\) and \(V\) be a vector field on \(M\) with \(V = (v_1,\ldots,V_n)\). Then for a smooth function \(f:U\to\R\), we have \[
-    D_V f(p)
-    = df_p(V_p)
-    = (\frac{\pa f}{\pa x_1}\cdots\frac{\pa f}{\pa x_n})\begin{pmatrix}
+  Put \(M = U\) open in \(\R^n\) and \(V\) be a vector field on \(M\) with \(v = (v_1,\ldots,v_n)\). Then for a smooth function \(f:U\to\R\), we have \[
+    D_v f(p)
+    = df_p(v_p)
+    = \Big(\frac{\pa f}{\pa x_1}\cdots\frac{\pa f}{\pa x_n}\Big)\begin{pmatrix}
       v_1(p)\\\cdots\\v_n(p)
     \end{pmatrix}
     = \sum_{i=1}^n v_i(p)\frac{\pa f}{\pa x_i}(p)
@@ -327,17 +327,24 @@ You may see in some books the notation \[
   v(f) = D_v f = \sum_{i=1}^n v_i\frac{\pa f}{\pa x_i},
 \] which may cause confusion. We will try to avoid such notation in this course.
 
-\begin{proposition}
-  \(D_{aV+W} =a D_V + D_W\)
-\end{proposition}
+\begin{lemma}
+  Let \(f:M\longrightarrow N\) be a smooth map, then
+  \begin{enumerate}
+    \item \(D_vf\) is \(\R\)-linear in \(f\),
+    \item \(D_vf\) is \(C^\infty(M)\)-linear in \(v\),
+  \end{enumerate}
+\end{lemma}
 \begin{proof}
-  \begin{align*}
-    D_{aV+W}f(p)
-    = df_p((aV+W)_p)
-    = df_p(aV_p + w_p)
-    = a df_p(V_p) + df_p(w_p)
-    = a D_Vf(p) + D_Wf(p).
-  \end{align*}
+  \begin{enumerate}
+    \item Obvious.
+    \item Let \(g,h\in C^\infty(M)\) and \(u, v\) be vector fields on \(M\), then \begin{align*}
+      D_{gu + hv}f(p)
+      = df_p((gu + hv)_p)
+      &= df_p(g(p)u_p + h(p)v_p) \\
+      &= g(p)df_p(u_p) + h(p)df_p(v_p)
+      = g(p)D_uf(p) + h(p)D_vf(p),
+    \end{align*} where we have used the \(\R\)-linearity of \(df_p\).
+  \end{enumerate}
 \end{proof}
 
 \begin{proposition}
@@ -380,14 +387,14 @@ From the analysis point of view, \(D_v\) satisfies the Lebniz rule.
 
 The following is a dual notion of pushforward, and \(\f\)-related can be restated similarly.
 
-\begin{definition}[\emph{pullback}]
+\begin{definition}[\emph{pullback for smooth functions}]
   Let \(M\), \(N\) be smooth manifolds and \(\f:M\to N\) be a smooth map. Then each \(f\in C^\infty(N)\) defines a \emph{pullback} map \(\f^*f = f\circ\f \in C^\infty(M)\).
 \end{definition}
 
 \begin{proposition}
-  Let \(V\), \(W\) be vector fields on smooth manifolds \(M\), \(N\) respectively and \(\f:M\to N\) be a smooth map. Then \(V\) and \(W\) are \(\f\)-related if and only if the diagram \[
+  Let \(v\), \(w\) be vector fields on smooth manifolds \(M\), \(N\) respectively and \(\f:M\to N\) be a smooth map. Then \(v\) and \(w\) are \(\f\)-related if and only if the diagram \[
     \begin{tikzcd}
-      C^\infty(M) \ar{d}{D_V} & C^\infty(N) \ar[swap]{l}{\f^*} \ar{d}{D_W} \\
+      C^\infty(M) \ar{d}{D_v} & C^\infty(N) \ar[swap]{l}{\f^*} \ar{d}{D_w} \\
       C^\infty(M) & C^\infty(N) \ar[swap]{l}{\f^*}
     \end{tikzcd} \text{ commutes},
   \] i.e. \(D_v\circ\f^* = \f^*\circ D_w\).
@@ -411,7 +418,7 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
 \] giving the conjugation \(\f^*D_w(\f^{-1})^* = D_v\).
 
 \begin{corollary}
-  If \(f\) is a smooth function on a smooth manifold \(M\), then \(D_Vf\) is also smooth for any smooth vector field \(V\) on \(M\).
+  If \(f\) is a smooth function on a smooth manifold \(M\), then \(D_vf\) is also smooth for any smooth vector field \(v\) on \(M\).
 \end{corollary}
 \begin{proof}
   Consider a chart \((\f,U,V)\) around \(p\in M\), then put \(w = \f_*v\) be a vector field.
@@ -431,8 +438,9 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
 %   Let \(M\) be a smooth manifold and \(V\) be a vector field on \(M\). Then \(V\) is smooth if and only if for each smooth function \(f:M\to\R\), \(D_V f\) is also smooth.
 % \end{proposition}
 
-\section{Lie Brackets and Lie Derivatives}
+\section{Lie Bracket and Lie Derivative}
 
+\subsection{Lie Bracket}
 \begin{lemma}\label{lem:lie_brk_exist}
   Let \(u\), \(v\) be smooth vector fields on a smooth manifold \(M\). Then there exists a unique smooth vector field \(w\) such that \begin{equation}\label{eqn:lie_brk}
     D_w f = [D_u,D_v]f
@@ -562,6 +570,8 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
   From an operator point of view, we can expand the cyclic sum to obtain 12 terms and they cancel out.
 \end{proof}
 
+\subsection{Lie Algebras}
+
 \begin{definition}
   A \emph{Lie algebra} \((\g,[\ ,\ ])\) is a vector space \(\g\) equipped with a product \([\ ,\ ]:\g\times\g\longrightarrow\g\), called \emph{bracket}, satisfying \begin{itemize}
     \item (bilinearity) for all \(a,b\in\R\) and \(v_1,v_2,v_3\in\g\), \begin{align*}
@@ -604,6 +614,8 @@ As a special case, if \(\f\) is a diffeomorphism, let \(w = \f_*V\) be the pushf
     [v_1,v_2]\f^* = \f^*[w_1,w_2],
   \] which is immediate. 
 \end{proof}
+
+\subsection{Lie Derivative}
 
 The following derivative unifies the notions of directional derivative and Lie bracket using a purely geometric point of view. We make use of the family of diffeomorphisms \(\phi_t\), which is natural to take derivatives with.
 
