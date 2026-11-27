@@ -1,8 +1,6 @@
 \chapter{Differential Forms}
 
-This section follows Guillemin, Pollack: Chapter 4.2 Exterior Algebra.
-
-\section{Multilinear Algebra}
+\section[Multilinear Algebra]{Multilinear Algebra\headingnote{Guillemin, Pollack, \emph{Differential Topology}, \S4.2}}
 
 Let \(V\) be a vector space over \(\R\) and \(V^*\) its dual space.
 
@@ -750,7 +748,7 @@ This lemma tells us that pullback is basically a change of variables by setting 
 \begin{lemma}[Pullback for Top Forms]\label{lem:pullback_top_forms}
     Let \(\f:M\longrightarrow N\) be a smooth map. Under local charts \((U,x_1,\ldots,x_n)\) of \(M\) and \((V,y_1,\ldots,y_n)\) of \(N\), for any \(g\in C^\infty(V)\), we have \[
         \f^*(g\,dy_1\wed\cdots\wed dy_n)
-        = (g\circ\f)\det\left(\frac{\pa\f_i}{\pa x_j}\right)\,dx_1\wed\cdots\wed dx_n.
+        = (g\circ\f)\det\left(\frac{\pa\f_i}{\pa x_j}\right)_{i,j}\,dx_1\wed\cdots\wed dx_n.
     \]
 \end{lemma}
 \begin{proof}
@@ -774,6 +772,14 @@ This is exactly the change of variables formula in multivariable calculus.
 
 \subsection*{Lie Derivative}
 
+% \begin{definition}[\emph{Lie derivative for forms}]
+%     Let \(X\in\Gamma^\infty(TM)\) be a smooth vector field, we define \(\L_X:\Omg^k(M)\longrightarrow\Omg^k(M)\) by \[
+%         \L_X\omg(X_1,\ldots,X_k)
+%         = D_X\Big(\omg(X_1,\ldots,X_k)\Big)
+%         - \sum_{1\leq i\leq k}\omg(X_1,\ldots,[X,X_i],\ldots,X_k).
+%     \]
+% \end{definition}
+
 \begin{definition}[\emph{Lie derivative for forms}]
     Let \(X\in\Gamma^\infty(TM)\) be a smooth vector field, for each \(p\in M\), choose a local flow \(\phi_t:(-\eps,\eps)\longrightarrow M\), we define \(\L_X:\Omg^k(M)\longrightarrow\Omg^k(M)\) pointwisely by \[
         (\L_X\omg)_p := \frac{d}{dt}\bigg|_{t=0} (\phi_t^*\omg)_p.
@@ -796,14 +802,14 @@ Under a local chart, we have \begin{align*}
 \end{align*}
 \end{lemma}
 
-When free of coordinates, Lie derivative is easier to compute, but when you have coordinates, it is easier to compute the Lie derivative by using Cartan's magic formula.
-\begin{theorem}[Cartan's magic formula]
+When free of coordinates, Lie derivative is easier to compute, but when you have coordinates, it is easier to compute the Lie derivative using Cartan's magic formula.
+\begin{theorem}[Cartan's magic formula]\label{thm:cartan_magic_formula}
     \[
         \L_X\omg = d(\i_X\omg) + \i_X(d\omg).
     \]
 \end{theorem}
 \begin{proof}
-    We use induction.
+    We perform induction.
     \begin{itemize}
         \item For \(0\)-forms, let \(\omg = f\in\Omg^0(M)\), \[
             \L_Xf = D_Xf =  df(X) = (\i_Xd)f.
@@ -824,8 +830,12 @@ When free of coordinates, Lie derivative is easier to compute, but when you have
             \Big) - \i_X\Big(
                 dx_1\wed d\omg_1    
             \Big) \\
-            &= \textcolor{blue}{d\Big(\i_X (dx_1)\Big)\wed\omg_1} + (\i_X dx_1)\wed d\omg_1 + \textcolor{red}{dx_1\wed d(\i_X\omg_1)} \\
-            &\hphantom{= d\Big(\i_X (dx_1)\Big)\wed\omg_1}\ - (\i_X dx_1)\wed d\omg_1 + \textcolor{red}{dx_1\wed\i_X (d\omg_1)}
+            &= \textcolor{blue}{d\Big(\i_X (dx_1)\Big)\wed\omg_1}
+            + \cancel{(\i_X dx_1)\wed d\omg_1}
+            + \textcolor{red}{dx_1\wed d(\i_X\omg_1)} \\
+            &\hphantom{= d\Big(\i_X (dx_1)\Big)\wed\omg_1}\ 
+            - \cancel{(\i_X dx_1)\wed d\omg_1}
+            + \textcolor{red}{dx_1\wed\i_X (d\omg_1)}
         \end{align*}
         Compare the colored terms by base case and induction assumption, the result follows.
     \end{itemize}

@@ -9,11 +9,13 @@
 \makeatother
 % ---------------------
 
-\usepackage{graphicx, tikz, mdframed}
+\usepackage{graphicx, tikz, mdframed, float}
 \usetikzlibrary{arrows.meta, calc, cd, intersections, patterns.meta}
 
 \usepackage{caption, subcaption}
 \captionsetup{labelsep=space} % "Figure 2.1 The ..." (no colon)
+
+\usepackage[makeroom]{cancel}
 
 % enum
 \usepackage{enumitem}
@@ -262,3 +264,7 @@
 
 \newcommand{\longtwoheadrightarrow}{\relbar\joinrel\twoheadrightarrow}
 \newcommand{\longtwoheadleftarrow}{\twoheadleftarrow\joinrel\relbar}
+
+\newcommand{\headingnote}[1]{%
+  \hfill{\normalfont\footnotesize\sffamily #1}%
+}

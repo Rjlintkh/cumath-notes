@@ -1,0 +1,23 @@
+
+\chapter{\v{C}ech Cohomology}
+
+\section{\v{C}ech Cohomology of a Covering}
+
+\section[Presheaves and Sheaves]{Presheaves and Sheaves\headingnote{Bott, Tu, \emph{Differential Forms in Algebraic Topology}, \S10}}
+
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\Gamma}
+
+\begin{definition}
+    A \emph{presheaf} \(\F\) on \(X\) is a map which assigns to \begin{itemize}
+        \item every open set \(U\subseteq X\) a set \(\F(U)\), and
+        \item every pair of open sets \(U\supset V\) a \emph{restriction map} \(\G{U,V}:\F(U)\to\F(V)\)
+    \end{itemize} satisfing the axioms \begin{enumerate}[label=(\textit{\arabic*})]
+        \item \(U\supset V\supset W\), then \(\G_{U,W} = \G_{V,W}\circ\G_{U,V}\);
+        \item \(\G_{U,U} = \id\).
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    For a manifold \(\F(U) = C^\infty(U)\)
+\end{example}

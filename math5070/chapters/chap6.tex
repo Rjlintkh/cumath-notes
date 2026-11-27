@@ -1,4 +1,4 @@
-\chapter{Cohomology}
+\chapter{De Rham Cohomology}
 
 All sections and chapters above are just MATH5020, a graduate calculus course. Now we will switch to topology, starting MATH5070.
 
@@ -44,7 +44,7 @@ For manifolds, we can generalize the said notions as follows.
 
 These two spaces are not always the same, if we want to measure the difference between them, we take their quotient space, which is the de Rham cohomology group.
 \begin{definition}[\emph{de Rham cohomology group}]
-    The quotient space \[
+    The quotient vector space \[
         H_{\dR}^k(M) := Z^k(M) \Big/ B^k(M)
     \] is called the \(k\)-th \emph{de Rham cohomology group} of \(M\).
 \end{definition}
@@ -59,7 +59,7 @@ Note that if \(k > n\), then \(B^k(M) = Z^k(M) = \{0\}\), so \(H_{\dR}^k(M) = \{
 \end{definition}
 These two are topological invariants. 
 
-\section{The Ring Structure of Cohomology}
+\subsection*{The Ring Structure of Cohomology}
 
 \begin{definition}
     Given \(\omg\in Z^k(M)\), we call \([\omg] \in H_{dR}^k(M)\) the \emph{cohomology class} of \(\omg\).
@@ -109,7 +109,7 @@ This induces a map \(\f^*:H^k(N)\longrightarrow H^k(M)\) by \([\omg]\longmapsto 
     \] is a linear isomorphism.
 \end{theorem}
 
-\subsection{Computation of Cohomology Groups}
+\subsection*{Computation of Cohomology Groups}
 
 The remaining of this section is to compute these invariants for some manifolds and see when the \(\dim(H_{\dR}^k(M))\) is finite.
 
@@ -202,21 +202,31 @@ The remaining of this section is to compute these invariants for some manifolds 
 \end{example}
 
 
-\section{Homotopy Invariance}
 
-\newcommand{\simH}{\underset{hom}{\sim}}
 
-\begin{definition}[Homotopic maps]
-    Let \(f:M\longrightarrow N\) and \(g:M\longrightarrow B\) are \emph{homotopic} if there existts a smooth map \[
-        F:M\times\R\longrightarrow N, \quad (p,t)\longmapsto F(p,t)
+\section[Homotopy Invariance]{Homotopy Invariance\headingnote{Madsen, Tornhave, \emph{From Calculus to Cohomology}, \S6}}
+
+\newcommand{\simH}{\underset{\mathrm{hom}}{\sim}}
+
+\subsection*{Homotopy of Maps and Homotopy Equivalence}
+
+\begin{definition}[\emph{homotopic maps}]
+    Let \(f:M\longrightarrow N\) and \(g:M\longrightarrow B\) are \emph{homotopic} if there exists a smooth map \[
+        \Phi:M\times[0,1]\longrightarrow N, \quad (p,t)\longmapsto \Phi(p,t)
     \] such that \[
-        F(p,0) = f(p),\quad F(p,1) = g(p),\quad \forall p\in M.
+        \Phi(p,0) = f(p),\quad \Phi(p,1) = g(p),\quad \forall p\in M,
     \]
-    We write \(f\simH g\).
+    called the \emph{homotopgy} between \(f\) and \(g\). In this case, we write \(f\simH g\).
     % local perturbation of each others
 \end{definition}
 
-\begin{definition}[Homotopy equivalence]
+\begin{example}[\emph{straight-line homotopy}]
+    Let \(f,g: M\longrightarrow\R^n\) be two smooth maps, define \(\Phi:M\times\R\longrightarrow\R^n\) by \[
+        \Phi(x,t) = (1-t)f(x) + tg(x).
+    \] Then \(\Phi\) is a homotopy between \(f\) and \(g\), called the \emph{straight-line homotopy}.
+\end{example}
+
+\begin{definition}[\emph{homotopy equivalence}]
     Two smooth manifolds \(M\) and \(N\) are \emph{homotopy equivalent} if there exist smooth maps \[
         f:M\longrightarrow N,\quad g:N\longrightarrow M
     \] such that \[
@@ -224,59 +234,124 @@ The remaining of this section is to compute these invariants for some manifolds 
     \]
 \end{definition}
 
-\newpage
-
 \begin{example}
-    \(S^{n-1} \sim \R^n\setminus\{0\}\).\\
+    \(S^{n-1} \simH \R^n\setminus\{0\}\).
     \begin{roof}
-        Let \(\f = \i:S^{n-1}\longrightarrow\R^n\setminus\{0\}\), \(\psi:\R^n-\{0\}\longrightarrow S^{n-1}\) by \(x\longmapsto \frac{x}{\|x\|}\).
-        
-        Note that \(\psi\circ\f = \id\) because \[
+        Consider the smooth maps \begin{alignat*}{2}
+            \f=\iota: S^{n-1}
+                &\longrightarrow \mathbb{R}^n\setminus\{0\},
+            &\qquad \psi: \mathbb{R}^n\setminus\{0\}
+                &\longrightarrow S^{n-1},\\
+            x &\longmapsto x,
+            & x &\longmapsto \frac{x}{\|x\|}.
+        \end{alignat*}
+        We have \(\psi\circ\f = \id\) because \[
             \begin{tikzcd}
-                x \ar[|->]{r}{\f} & x \ar[|->]{r}{\psi} & \frac{x}{1} = x
+                x \ar[|->]{r}{\f} & x \ar[|->]{r}{\psi} & \frac{x}{1} = x.
             \end{tikzcd}
         \]
-
-        Now we check \(\f\circ\psi \simH \id\), by Lagrange interpolation, we construct \[
-            \Phi(x,t) = tx + (1 - t)\frac{x}{\|x\|}.
-        \]
+        To show \(\f\circ\psi \simH \id\), we use the straight-line homotopy \[
+            \Phi(x,t) = (1 - t)\frac{x}{\|x\|} + tx
+            = \left(\frac{1 - t}{\|x\|} + t\right)x.
+        \] Since the coefficient of \(x\) is positive on \(t\in [0,1]\), we see \(\Phi\) is well-defined into \(\R^n\setminus\{0\}\).
     \end{roof}
 \end{example}
 
 \begin{example}
-    A \emph{star-shaped} region \(U\) in \(\R^n\) is a region with the property \[
-        \exists x_0\in U, \text{ such that } \forall x\in U, tx_0 + (1-t)x \in U, \forall t\in[0,1].
+    A \emph{star-shaped} region \(U\) in \(\R^n\) is a region with a \emph{center} \(x_0\in U\) satisfying \[
+        (1-t)x + tx_0 \in U \quad \forall x\in U,\ \forall t\in[0,1].
     \]
-    We claim \(U\simH\{x_0\}\). Put \[
-        \f:\{x_0\}\longrightarrow U, \quad \psi:U\longrightarrow\{x_0\},
+    We claim \(U\simH\{x_0\}\). Consider the inclusion and restriction maps \[
+        \f:\{x_0\}\longrightarrow U, \quad \psi:U\longrightarrow\{x_0\}.
     \]
-    clearly \(\psi\circ\f = \id:\{x_0\} \to \{x_0\}\), and \[
+    Clearly \(\psi\circ\f = \id:\{x_0\} \longrightarrow \{x_0\}\), and \[
         \f\circ\psi : U\longrightarrow U, \quad x\longmapsto x_0.
     \] is homotopic to \(\id:U\longrightarrow U\) by \[
-        \Phi(x,t) = tx_0 + (1-t)x,
-    \] which is well-defined by the definition of being star-shaped.
+        \Phi(x,t) = (1-t)x + tx_0 ,
+    \] which is well-defined into \(U\) by its star shape.
 \end{example}
 
 We see that a star-shaped region is homotopy equivalent to a point. Actually, we have a name for this kind of space.
 
 \begin{definition}
-    Any region homotopic to a singleton is called \emph{contractible}.
+    Any region homotopic to a single-point set is called \emph{contractible}.
 \end{definition}
 
-The following is the main theorem of this section.
+\subsection*{Homotopy Invariance of Cohomology}
 \begin{theorem}
     Let \(f,g:M\longrightarrow N\) be homotopic, then \[
         f^* = g^*:H^k(N)\longrightarrow H^k(M).
     \]
 \end{theorem}
 \begin{proof}
-    a
+    \begin{roof}
+        Consider the diagram of de Rham cochain complexes \[
+            \begin{tikzcd}[column sep=8em]
+                \vdots \ar{d}{d} & \vdots \ar{d}{d} \\
+                \Omg^{k-1}(N) \ar{r} \ar{d}{d} & \Omg^{k-1}(M) \ar[blue]{d}{d} \\
+                \Omg^k(N) \ar{r}{f^*}[']{g^*} \ar[blue]{ur}{\wt{Q}} \ar[red]{d}{d} & \Omg^k(M) \ar{d}{d} \\
+                \Omg^{k+1}(N) \ar{r} \ar[red]{ur}[']{\wt{Q}} \ar{d}{d} & \Omg^{k+1}(M) \ar{d}{d} \\
+                \vdots & \vdots
+            \end{tikzcd}
+        \]
+        The strategy is to construct \(\wt{Q}:\Omg^k(N)\longrightarrow\Omg^{k-1}(M)\) such that \(g^* - f^* = \textcolor{blue}{d\wt{Q}} + \textcolor{red}{\wt{Q}d}\).
+        Afterwards, let \(\omg\in Z^k(N)\), then \begin{align*}
+            g^*\omg - f^*\omg
+            = d\wt{Q}(\omg) + \wt{Q}(\cancel{d\omg}) = d\wt{Q}(\omg)\in B^k(M),
+        \end{align*} which implies \((g^* - f^*)([\omg]) = 0\in H^k(M)\).
+    \end{roof}
+    We first do a special case.
+    \begin{roof}
+        Let \(X\) be a complete vector field on \(M\) and \(\phi_t\) the flow generated by \(X\). We want to construct a linear operator \(
+            Q:\Omg^k(M)\longrightarrow\Omg^{k-1}(M)
+        \) such that \[
+            \phi_1^* - \phi_0^* = dQ + Qd.
+        \]
+        \begin{roof}
+            We apply the fundamental theorem of calculus, \begin{align*}
+                \phi_1^*\omg - \phi_0^*\omg
+                = \int_0^1 \frac{d}{dt}\phi_t^*\omg\,dt.
+            \end{align*}
+            Then by the Cartan magic formula~\ref{thm:cartan_magic_formula}, \begin{align*}
+                \frac{d}{dt} \phi_t^*\omg
+                = \frac{d}{ds} \phi_{t+s}^*\omg \bigg|_{s=0}
+                = \frac{d}{ds} \phi_s^*\phi_t^*\omg \bigg|_{s=0}
+                &= \L_X \phi_t^*\omg \\
+                &= d(\iota_X\phi_t^*\omg) + \iota_X(d\phi_t^*\omg) \\
+                &= d\underbrace{(\iota_X\phi_t^*\omg)}_{Q_t(\omg)} + \underbrace{(\iota_X\phi_t^*)}_{Q_t}\,d\omg.
+            \end{align*}
+            Put \(Q_t = \i_X\phi_t^*\), then \(\dfrac{d}{dt}\phi_t^*\omg = dQ_t(\omg) + Q_t(d\omg)\), finally, define \[
+                \Omg^k(M) \xlongrightarrow{Q} \Omg^{k-1}(M),\quad \omg\longmapsto \int_0^1 Q_t(\omg)\,dt,
+            \] then indeed \begin{align*}
+                \phi_1^*\omg - \phi_0^*\omg
+                &= \int_0^1 dQ_t(\omg)\,dt + \int_0^1 Q_t(d\omg)\,dt \\
+                &= d\int_0^1 Q_t(\omg)\,dt + \int_0^1 Q_t(d\omg)\,dt
+                = dQ(\omg) + Q(d\omg).
+            \end{align*}
+        \end{roof}
+    \end{roof}
+    We do the general case.
+    \begin{roof}
+        Put \(W = M\times\R\) and \(f,g\) be homotopic by \(\Phi:M\times[0,1]\longrightarrow N\) such that \[
+            \Phi(p,0) = f(p),\quad \Phi(p,1) = g(p)\qquad \forall p\in M.
+        \]
+        Note that \(X = \frac{\pa}{\pa t}\) is a complete vector field on \(W\) whose flow \(\phi_t(p,a) = (p, a + t)\). Denote by \[
+            \i:M\longrightarrow W,\quad \i(p) = (p,0)
+        \] the inclusion map, then \(f = \Phi\circ\phi_0\circ\i\) and \(g = \Phi\circ\phi_1\circ\i\). Applying the special case, we obtain \begin{align*}
+            g^*\omg - f^*\omg
+            &= \i^*\phi_1^*\Phi^*\omg - \i^*\phi_0^*\Phi^*\omg \\
+            &= \i^*(\phi_1^* - \phi_0^*)\Phi^*\omg \\
+            &= \i^*(dQ + Qd)\Phi^*\omg \\
+            &= (d\wt{Q} + \wt{Q}d)\omg,
+        \end{align*} where we put \(\wt{Q} := \i^*\circ Q\circ\Phi^*\).
+    \end{roof}
 \end{proof}
 
-\begin{corollary}[Homotopy invariance of cohomology]
+This results in the main result of the section, the de Rham cohomology is a \emph{homotopy invariant}, and hence a \emph{topological invariant}, even when the spaces are not diffeomorphic.
+\begin{corollary}
     If \(M\) and \(N\) are homotopy equivalent, then \[
         H^k(M)\cong H^k(N).
-    \] (The spaces do not have to be diffeomorphic.)
+    \]
 \end{corollary}
 \begin{proof}
     By definition, there exist \(\f,\psi\) such that \(\f\circ\psi \simH \id_N\) and \(\psi\circ\f \simH \id_M\). By the theorem, we have \[
@@ -287,18 +362,500 @@ The following is the main theorem of this section.
 
 \begin{corollary}
     If \(M\) is contractible, then \[
-        H^k(M) \cong H^k(\{p\}) = \begin{cases}
+        H^k(M) = \begin{cases}
             \R & k = 0,\\
             0 & k > 0.
         \end{cases}
     \]
 \end{corollary}
+\begin{proof}
+    Simply note that \(M\simH\{p\}\simH \R\).
+\end{proof}
 
 % \begin{definition}
 %     \[
 %         \omg - \omg' = d\tau\in B^k(M),
 %     \] i.e.\ differ by an exact form. In this case, we say \(\omg\) and \(\omg'\) are \emph{cohomologous}.
 % \end{definition}
+
+\section{Mayer-Vietoris Sequence}
+
+\subsection*{Cohomological Algebra\headingnote{Tu, \emph{An Introduction to Manifolds}, \S25}}
+
+Now, let's temporary forget about those differential forms and exterior derivative, and look at the most basic setup.
+
+\begin{definition}
+    A \emph{co-chain complex} is a sequence of vector spaces \[
+        \begin{tikzcd}
+            \cdots \ar{r} & C^{k-1} \ar{r}{d_{k-1}} & C^k \ar{r}{d_k} & C^{k+1} \ar{r}{d_{k+1}} & \cdots
+        \end{tikzcd}
+    \] where \(d\) is a linear map such that \(d^2 = 0\). Furthermore, a complex is \emph{exact} if \(\im d_k = \ker d_{k+1}\).
+\end{definition}
+
+Here are two ingredients for diagram chasing arguments.
+
+\begin{definition}
+    A sequence \[
+        \begin{tikzcd}
+            A \ar{r}{f} & B \ar{r}{g} & C
+        \end{tikzcd}
+    \] is said to be \emph{exact at \(B\)} if \(\im f = \ker g\). A sequence is \emph{exact} if it is exact at every term except the first and last. A \emph{short} sequence is a sequence of the form \[
+        \begin{tikzcd}
+            0 \ar{r} & A \ar{r}{f} & B \ar{r}{g} & C \ar{r} & 0.
+        \end{tikzcd}
+    \]
+\end{definition}
+
+We see that a short exact sequence already contains a lot of information, for \[
+    \begin{tikzcd}
+        0 \ar{r}{\i} & A \ar{r}{f} & B \ar{r}{g} & C \ar{r}{\pi} & 0,
+    \end{tikzcd}
+\] we see that since \(\dom\i = 0\) and \(\im\pi = 0\), we have \(\i = \id\) and \(\pi = 0\), so we can omit them. Furthermore, \begin{itemize}
+    \item exactness at \(A\) means \(\im\i = 0 = \ker f\), hence \(f\) is injective,
+    \item exactness at \(C\) means \(\im g = C = \ker\pi\), hence \(g\) is surjective.
+\end{itemize}
+Therefore, we can also write the short exact sequence as \[
+    \begin{tikzcd}
+        0 \ar{r} & A \ar[hook]{r}{f} & B \ar[->>]{r}{g} & C \ar{r} & 0.
+    \end{tikzcd}
+\]
+
+\begin{definition}
+    A \emph{commutative diagram} is a diagram \[
+        \begin{tikzcd}
+            C_1 \ar{r}{f} \ar{d}{g_1} & C_2 \ar{d}{g_2} \\
+            C_1' \ar{r}{f'} & C_2'
+        \end{tikzcd}
+    \]
+\end{definition} such that \(g_2\circ f_1 = h_1\circ g_1\). In other words, the two paths from \(C_1\) to \(C_2'\) are equal.
+
+\begin{lemma}
+    Suppose we have a commutative diagram of short exact sequences \[
+        \begin{tikzcd}
+            0 \ar{r} & A_1 \ar[hook]{r}{f_1} \ar{d}{g_1} & B_1 \ar[->>]{r}{h_1} \ar{d}{g_2} & C_1 \ar{r} \ar{d}{g_3} & 0 \\
+            0 \ar{r} & A_2 \ar[hook]{r}{f_2} & B_2 \ar[->>]{r}{h_2} & C_2 \ar{r} & 0
+        \end{tikzcd}
+    \]
+\end{lemma}
+
+Short sequences of co-chain complexes can induce a long exact sequence in cohomology. Suppose we have a family of short exact sequences \[
+    \begin{tikzcd}
+         & \vdots & \vdots & \vdots &  \\
+        0 \ar{r} & C_1^{k+1} \ar{r}{i} & C_2^{k+1} \ar{r}{j} & C_3^{k+1} \ar{r} & 0 \\
+        0 \ar{r} & C_1^k \ar{r}{i} & C_2^k \ar{r}{j} & C_3^k \ar{r} & 0 \\
+        0 \ar{r} & C_1^{k-1} \ar{r}{i} & C_2^{k-1} \ar{r}{j} & C_3^{k-1} \ar{r} & 0 \\
+         & \vdots & \vdots & \vdots & 
+    \end{tikzcd}
+\]
+We can connect them vertically with \(C^k\xrightarrow[\hspace{1.5em}]{d} C^{k+1}\) to obtain a commutative digram \[
+    \begin{tikzcd}
+         & \vdots & \vdots & \vdots & \\
+        0 \ar{r} & C_1^{k+1} \ar{r}{i} \ar[blue]{u}{d} & C_2^{k+1} \ar{r}{j} \ar[blue]{u}{d} & C_3^{k+1} \ar{r} \ar[blue]{u}{d} & 0 \\
+        0 \ar{r} & C_1^k \ar{r}{i} \ar[blue]{u}{d} & C_2^k \ar{r}{j} \ar[blue]{u}{d} & C_3^k \ar{r} \ar[blue]{u}{d} & 0 \\
+        0 \ar{r} & C_1^{k-1} \ar{r}{i} \ar[blue]{u}{d} & C_2^{k-1} \ar{r}{j} \ar[blue]{u}{d} & C_3^{k-1} \ar{r} \ar[blue]{u}{d} & 0 \\
+        & \vdots \ar[blue]{u}{d} & \vdots \ar[blue]{u}{d} & \vdots \ar[blue]{u}{d} &
+    \end{tikzcd}
+\] where each column is a co-chain complex. By diagram chasing, we can construct the \emph{boundary maps} \(C_3^k\xrightarrow[\hspace{1.5em}]{\delta} C_1^{k+1}\) to obtain
+
+\tikzcdset{
+  boundary/.style={
+    green!55!black,
+    out=80, in=-80, looseness=.5,
+    start anchor=north east,
+    end anchor=south east,
+    preaction={draw=white, line width=3pt, arrows=-}
+  }
+}
+
+\[
+    \begin{tikzcd}[row sep=3em, column sep=3em]
+    & \vdots & \vdots & \vdots & \\
+    0 \arrow[r]
+        & C_1^{k+1} \ar{r}{i} \ar[blue]{u}{d}
+        & C_2^{k+1} \ar{r}{j} \ar[blue]{u}{d}
+        & C_3^{k+1} \ar{r} \ar[blue]{u}{d}
+        & 0 \\
+    0 \arrow[r]
+        & C_1^k \ar{r}{i} \ar[blue]{u}{d}
+        & C_2^k \ar{r}{j} \ar[blue]{u}{d}
+        & C_3^k \ar{r} \ar[blue]{u}{d}
+        & 0 \\
+    0 \arrow[r]
+        & C_1^{k-1} \ar{r}{i} \ar[blue]{u}{d}
+        & C_2^{k-1} \ar{r}{j} \ar[blue]{u}{d}
+        & C_3^{k-1} \ar{r} \ar[blue]{u}{d}
+        & 0 \\
+        & \vdots \ar[blue]{u}{d}
+        & \vdots \ar[blue]{u}{d}
+        & \vdots \ar[blue]{u}{d}
+        &
+        \ar[boundary, from=2-4, to=1-2]{}[']{\delta}
+        \ar[boundary, from=3-4, to=2-2]{}[']{\delta}
+        \ar[boundary, from=4-4, to=3-2]{}[']{\delta}
+    \end{tikzcd}
+\] and induce a long exact sequence \[
+    \begin{tikzcd}
+        \cdots \ar[green!55!black]{r}{\delta} & H^k(C_1) \ar{r}{i^*} & H^k(C_2) \ar{r}{j^*} & H^k(C_3) \ar[green!55!black]{r}{\delta} & H^{k+1}(C_1) \ar{r}{i^*} & \cdots
+    \end{tikzcd}
+\]
+
+\subsection*{Mayer-Vietoris Sequence\headingnote{Tu, \emph{An Introduction to Manifolds}, \S26}}
+
+We apply the above discussion to the case of de Rham cohomology. From now on, we assume \(H^k(M)\) is the de Rham cohomology \(H_{\dR}^k(M)\).
+
+\begin{theorem}[Mayer-Vietoris]
+    Let \(M\) be a manifold and \(U,V\subset M\) be open sets such that \(M = U\cup V\). Then the \emph{Mayer-Vietoris sequence}
+    \[
+        \tikzset{
+            mv zigzag/.style={
+                rounded corners=3pt,
+                to path={
+                let \p1 = (\tikztostart.east),
+                    \p2 = (\tikztotarget.west),
+                    \n1 = {(\y1+\y2)/2}
+                in
+                (\p1)
+                    -- ({\x1+5mm},\y1)
+                    -- ({\x1+5mm},\n1)
+                    -- ({\x2-5mm},\n1) \tikztonodes
+                    -- ({\x2-5mm},\y2)
+                    -- (\p2)
+                }
+            }
+        }
+        \begin{tikzcd}[column sep=large, row sep=huge]
+            H^{k+1}(M) \ar{r}{i^*} & \cdots \hspace{4em} \\
+            H^k(M) \ar{r}{i^*}
+            & H^k(U)\oplus H^k(V) \ar{r}{j^*}
+            & H^k(U\cap V) \ar[mv zigzag]{ull}[swap]{\delta} \\
+            & \hspace{5em}\cdots \ar{r}{j^*} & H^{k-1}(U\cap V) \ar[mv zigzag]{ull}[swap]{\delta}
+        \end{tikzcd}
+    \] is long exact, where \(i:U\longhookrightarrow M\) is the inclusion and \(j:U\cap V\longhookrightarrow U\oplus V\) is the restriction.
+\end{theorem}
+\begin{proof}
+    Construct the short exact sequence \[
+        \begin{tikzcd}
+            0 \ar{r} & \Omg^k(M) \ar{r}{i} & \Omg^k(U)\oplus\Omg^k(V) \ar{r}{j} & \Omg^k(U\cap V) \ar{r} & 0 \\
+            & \omg \ar[|->]{r}{i} & (\omg|_U, \omg|_V), \\
+            & & (\omg_1, \omg_2) \ar[|->]{r}{j} & \omg_1|_{U\cap V} - \omg_2|_{U\cap V}.
+        \end{tikzcd},
+    \]
+\end{proof}
+
+\begin{corollary}\label{cor:mv_euler_char}
+    Let \(M\) be a manifold and \(U,V\subset M\) be open sets such that \(M = U\cup V\). Suppose \(\dim H^k(M), \dim H^k(U), \dim H^k(V), \dim H^k(U\cap V)<\infty\), then \[
+        \chi(M) - (\chi(U) + \chi(V)) + \chi(U\cap V) = 0.
+    \]
+\end{corollary}
+\begin{proof}
+    Write the Mayer-Vietoris sequence as \[
+        \begin{tikzcd}
+            0 \ar{r}{f_{-1}} & C^0 \ar{r}{f_0} & C^1 \ar{r}{f_1} & C^2 \ar{r}{f_2} & \cdots \ar{r}{f_{n-1}} & C^n \ar{r}{f_n} & 0,
+        \end{tikzcd}
+    \] then by rank-nullity theorem and exactness, \begin{align*}
+        \sum_{k=0}^n (-1)^k\dim C^k
+        &= \sum_{k=0}^n (-1)^k(\dim\ker f_k + \dim\im f_k) \\
+        &= \sum_{k=0}^n (-1)^k(\dim\im f_{k-1} + \dim\im f_k) \\
+        &= \dim\im f_{-1} + \sum_{k=0}^{n-1} (\dim\im f_k - \dim\im f_k) + (-1)^n\dim\im f_n = 0,
+    \end{align*} since \(\im f_{-1} = 0 = \im f_n\).
+\end{proof}
+
+One favorable case of applying the Mayer-Vietoris sequence is when \(H^k(U)\) and \(H^k(V)\) are simpler, then we can compute \(H^k(M)\).
+
+\tikzcdset{scale cd/.style={every label/.append style={scale=#1},
+    cells={nodes={scale=#1}}}}
+\begin{example}
+    \(H^k(S^n) = \begin{cases}
+        \R & k = 0, n,\\
+        0 & 1\leq k\leq n-1.
+    \end{cases}\).
+\end{example}
+\begin{proof}
+    We will show for \(n\geq 2\), \begin{enumerate}[label=({\itshape \arabic*})]
+        \item \(H^1(S^n) = 0\), and
+        \item \(H^k(S^n) = H^{k-1}(S^{n-1})\) for \(2\leq k\leq n\).
+    \end{enumerate}
+    Take the cover \[
+        U = S^n\setminus\{\text{north pole}\} \cong \R^n,\quad
+        V = S^n\setminus\{\text{south pole}\} \cong \R^n,
+    \] by contracting to equator, we see \(U\cap V\simH S^{n-1}\).
+    \begin{enumerate}[label=({\itshape \arabic*})]
+        \item We have \[
+            \begin{tikzcd}[sep=small]
+                & 0 \ar{r}
+                & H^0(S^n) \ar{r} \ar[equals]{d}
+                & H^0(U)\oplus H^0(V) \ar{r} \ar[equals]{d}
+                & H^0(U\cap V) \ar{r}{\delta} \ar[equals]{d}
+                & H^1(S^n) \ar{r} \ar[equals]{d}
+                & H^1(U)\oplus H^1(V) \ar{r} \ar[equals]{d}
+                & \cdots \\
+                & 0 \ar{r}
+                & \R \ar{r}{i}
+                & \R\oplus\R \ar{r}{j}
+                & \R \ar{r}{\delta}
+                & H^1(S^n) \ar{r}
+                & 0 \oplus 0
+            \end{tikzcd}
+        \]
+        \begin{itemize}
+            \item Injectivity of \(i\) gives \(\R = \im i = \ker j\).
+            \item Rank-nullity theorem gives \[
+                \dim\im j = \dim(\R\oplus\R) - \dim\ker j = 2 - 1 = 1 = \dim\R,
+            \] so \(j\) is surjective.
+            \item Surjectivity of \(j\) gives \(\R = \im j = \ker\delta\), so \(\delta = 0\), hence \(H^1(S^n) = 0\).
+        \end{itemize}
+        \item We have \[
+            \begin{tikzcd}[sep=small]
+                & \cdots \ar{r}
+                & H^{k-1}(U)\oplus H^{k-1}(V) \ar{r} \ar[equals]{d}
+                & H^{k-1}(U\cap V) \ar{r}{\delta} \ar[equals]{d}
+                & H^k(S^n) \ar{r} \ar[equals]{d}
+                & H^k(U)\oplus H^k(V) \ar{r} \ar[equals]{d}
+                & \cdots \\
+                & 
+                & 0\oplus 0 \ar{r}
+                & H^{k-1}(S^{n-1}) \ar{r}{\delta}
+                & H^k(S^n) \ar{r}
+                & 0 \oplus 0
+            \end{tikzcd}
+        \]
+        Injectivity and surjectivity of \(\delta\) gives \(H^k(S^n) = H^{k-1}(S^{n-1})\).
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    If \(m\neq n\), then \(\R^m\) is not homeomorphic to \(\R^n\).
+\end{corollary}
+\begin{proof}
+    Let \(f:\R^m\longrightarrow\R^n\) be a homeomorphism, then \[
+        f:\R^m\setminus\{0\}\simH S^{m-1}\longrightarrow\R^n\setminus\{f(0)\}\simH S^{n-1}
+    \] is a homeomorphism, hence \(H^{m-1}(S^{m-1}) = H^{m-1}(S^{n-1})\), which forces \(m = n\).
+\end{proof}
+
+% \begin{lemma}
+%     If \(\dim H^k(M) < \infty\) for all \(k\) and \[
+%         \begin{tikzcd}
+%             0 \ar{r} & H^1(M) \ar{r} & H^2(M) \ar{r} & \cdots \ar{r} & H^n(M) \ar{r} & 0
+%         \end{tikzcd}
+%     \] is exact, then \(\chi(M) = 0\).
+% \end{lemma}
+
+\begin{example}
+    \(H^k(T^2) = \begin{cases}
+        \R & k = 0, \\
+        \R^2 & k = 1, \\
+        \R & k = 2, \\
+        0 & k > 2.
+    \end{cases}\)
+\end{example}
+\begin{proof}
+    Since \(T^2\) is connected, we have \(H^0(T^2) = 1\). Since \(\dim T^2 = 2\), we have \(H^k(T^2) = 0\) for \(k > 2\). We will show \begin{enumerate}[label=({\itshape \arabic*})]
+        \item \(H^2(T^2) = \R\)
+        \item \(H^1(T^2) = \R^2\)
+    \end{enumerate}
+    Take the cover \[
+        U = S^1\times (S^1\setminus\{\text{north pole}\}) \simH S^1,\quad
+        V = S^1\times (S^1\setminus\{\text{south pole}\}) \simH S^1,
+    \] then \(U\cap V\) consists of two disjoint cylinders, so \(U\cap V\simH S^1\sqcup S^1\). 
+    \begin{enumerate}[label=({\itshape \arabic*})]
+        \item Since \(H^1(U\cap V) = H^1(S^1\sqcup S^1) = H^1(S^1)\oplus H^1(S^1) = \R\oplus\R\), we have \[
+            \begin{tikzcd}[sep=small]
+                & \cdots \ar{r}
+                & H^1(U)\oplus H^1(V) \ar{r} \ar[equals]{d}
+                & H^1(U\cap V) \ar{r}{\delta} \ar[equals]{d}
+                & H^2(T^2) \ar{r} \ar[equals]{d}
+                & H^2(U)\oplus H^2(V) \ar{r} \ar[equals]{d}
+                & \cdots \\
+                & 
+                & \R\oplus\R \ar{r}{j}
+                & \R\oplus\R \ar{r}{\delta}
+                & H^2(T^2) \ar{r}
+                & 0\oplus 0
+            \end{tikzcd}
+        \]
+    Let \(\omg_U\) and \(\omg_V\) be the generators of \(H^1(U) = \R\) and \(H^1(V) = \R\), respectively, then \begin{align*}
+        j: H^1(U)\oplus H^1(V) = \R\oplus\R &\longrightarrow H^1(U\cap V) = \R\oplus\R, \\
+        (a\omg_U, b\omg_V) &\longmapsto (a\omg_U,a\omg_V) - (b\omg_U,b\omg_V) = \Big((a-b)\omg_U + (b-a)\omg_V\Big),
+    \end{align*} so \(\im j = \R\) is the diagonal line in \(\R^2\). By this and the surjectivity of \(\delta\), we have \[
+        \ker\delta = \im j = \R, \quad \im\delta = H^2(T^2).
+    \] Hence, rank-nullity theorem gives \[
+        2 = \dim \R\oplus\R = \dim\im\delta + \dim\ker\delta = \dim H^2(T^2) + 1,
+    \] so \(\dim H^2(T^2) = 1\), hence \(H^2(T^2) = \R\).
+    \item We have \[
+        \begin{tikzcd}
+            0 \ar{r}
+            & H^0(T^2) \ar{r} \ar[equals]{d}
+            & H^0(U)\oplus H^0(V) \ar{r} \ar[equals]{d}
+            & H^0(U\cap V) \ar{r}{\delta} \ar[equals]{d} & \ \\
+            & \R
+            & \R\oplus\R
+            & \R^2 \\
+            \ar{r}{\delta} & H^1(T^2) \ar{r}
+            & H^1(U)\oplus H^1(V) \ar{r} \ar[equals]{d}
+            & H^1(U\cap V) \ar{r}{\delta} \ar[equals]{d} & \  \\
+            & & \R\oplus\R
+            & \R\oplus\R \\
+            \ar{r}{\delta} & H^2(T^2) \ar{r} \ar[equals]{d}
+            & H^2(U)\oplus H^2(V) \ar{r} \ar[equals]{d}
+            & H^2(U\cap V) \ar{r}{\delta} \ar[equals]{d} & \  \\
+            & \R
+            & 0
+            & 0
+        \end{tikzcd}
+    \]
+    Therefore, by Corollary~\ref{cor:mv_euler_char}, we have \[
+        (1 - 2 + 2) + (\dim H^1(T^2) - 2 + 2) + (1 - 0 + 0) = 0,
+    \] so \(\dim H^1(T^2) = 2\), hence \(H^1(T^2) = \R^2\).
+    \end{enumerate}
+\end{proof}
+
+\pagebreak
+
+\section{De Rham Cohomology with Compact Support}
+
+\subsection{Good Covers}
+
+We have seen that if \(U\cap V\) is simple, like \(\emptyset\) or \(\R^n\), which is contractible, then such cover is handy.
+\begin{definition}
+    We say an open cover \(\{U_\a\}_\a\) is a \emph{good cover} if for any finite subset \(I = \{\a_1,\ldots,\a_k\}\), the intersection \[
+        U_I = U_{\a_1}\cap\cdots\cap U_{\a_k}
+    \] is either empty or diffeomorphic to \(\R^n\).
+\end{definition}
+
+
+\begin{example}
+Consider the following covers for \(S^1\):
+\begin{figure}[H]
+    \centering
+    \tikzset{
+        circlebase/.style={draw=black, line width=1pt},
+        coverarc/.style={line width=2pt, line cap=butt}
+    }
+
+    \begin{subfigure}[t]{0.47\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=0.88]
+            \path[use as bounding box]
+                (-2.35,-2.30) rectangle (2.35,2.30);
+
+            \draw[circlebase] (0,0) circle[radius=1.34];
+            \node at (0,0) {\(S^1\)};
+
+            % Two open arcs of 200 degrees, with disconnected overlap.
+            \draw[coverarc, red]
+                (-10:1.67)
+                arc[start angle=-10, end angle=190, radius=1.67];
+
+            \draw[coverarc, cyan]
+                (170:1.94)
+                arc[start angle=170, end angle=370, radius=1.94];
+        \end{tikzpicture}
+        \caption{}
+        \label{fig:s1-bad-cover}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.47\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=0.88]
+            \path[use as bounding box]
+                (-2.35,-2.30) rectangle (2.35,2.30);
+
+            \draw[circlebase] (0,0) circle[radius=1.34];
+            \node at (0,0) {\(S^1\)};
+
+            % Three open arcs of 200 degrees, centered 120 degrees apart.
+            \draw[coverarc, red]
+                (-10:1.67)
+                arc[start angle=-10, end angle=190, radius=1.67];
+
+            \draw[coverarc, cyan]
+                (110:1.94)
+                arc[start angle=110, end angle=310, radius=1.94];
+
+            \draw[coverarc, yellow]
+                (230:2.21)
+                arc[start angle=230, end angle=430, radius=2.21];
+        \end{tikzpicture}
+        \caption{}
+        \label{fig:s1-good-cover}
+    \end{subfigure}
+\end{figure}
+    The cover in (a) is not good because the intersection of the two arcs is disconnected, hence not \(\R^n\), while the cover in (b) is good because the intersection of any two arcs is still a single open arc, hence diffeomorphic to \(\R^1\).
+\end{example}
+
+\begin{proposition}
+    If a manifold \(M\) admits a good cover, then \(\dim H^k(M)<\infty\) for all \(k\).
+\end{proposition}
+
+\begin{proposition}
+    A compact manifold \(M\) always admits a finite good cover.
+\end{proposition}
+
+\subsection*{Compact Supports\headingnote{Bott, Tu, \emph{Differential Forms in Algebraic Topology}, \S1.2}}
+
+\begin{definition}
+    For \(\omg\in\Omg(M)\), the support of \(\omg\) is defined as \[
+        \supp\omg = \overline{\{p\in M:\omg_p\neq 0\}}.
+    \] We say \(\omg\) is \emph{compactly supported} if \(\supp\omg\) is compact.
+    Denote by \(\Omg_c^k(M)\) the space of compactly supported \(k\)-forms on \(M\).
+\end{definition}
+
+With these definitions, we obtain a cochain complex \[
+    \begin{tikzcd}
+        0 \ar{r} & \Omg_c^0(M) \ar{r}{d} & \Omg_c^1(M) \ar{r}{d} & \cdots \ar{r}{d} & \Omg_c^n(M) \ar{r} & 0,
+    \end{tikzcd}
+\]
+
+\begin{definition}
+    Denote by the vector spaces \[
+        Z_c^k(M) := \ker\Big(d:\Omg_c^k(M)\longrightarrow\Omg_c^{k+1}(M)\Big),\quad
+        B_c^k(M) := \im\Big(d:\Omg_c^{k-1}(M)\longrightarrow\Omg_c^k(M)\Big),
+    \] and the quotient vector space \[
+        H_{\dR}^k(M) := Z_c^k(M) \Big/ B_c^k(M)
+    \] is the \(k\)-th de Rham cohomology with compact support of \(M\).
+\end{definition}
+
+\begin{proposition}\label{prop:Hc0_conn_comp}
+    Let \(M\) be a smooth manifold with \(r\) compact connected components, then \(H_c^0(M)\cong \R^r\).
+\end{proposition}
+\begin{proof}
+    Note that \[
+        Z_c^0(M) = \{
+            f\text{ constant on each connect component of }M\text{ and }\supp(f)\text{ is compact}
+        \},
+    \] so \(r = \#{\text{compact connected components of }M}\).
+\end{proof}
+
+\begin{example}
+    \(H_c^k(\R) = \begin{cases}
+        0 & k = 0, \\
+        \R & k = 1.
+    \end{cases}\)
+\end{example}
+
+Now we see a big difference between \(H^k(M)\) and \(H_c^k(M)\), for example, \[
+    H_c^0(\R) = 0, \text{ but } H^0({\text{point}}) = \R,
+\] but \(\R\simH \{\text{point}\}\), so \(H_c^k\) is not a homotopy invariant.
+
+\begin{definition}[\emph{proper maps}]
+    A map \(\f:M\longrightarrow N\) is called \emph{proper} if for any compact set \(K\subset N\), the preimage \(f^{-1}(K)\) is compact in \(M\).
+\end{definition}
+When \(\f\) is proper, we recover the \emph{pullback} \[
+    f^*:\Omg_c^k(N)\longrightarrow\Omg_c^k(M).
+\]
+
+\begin{theorem}
+    Let \(f,g:M\longrightarrow N\) be \emph{properly} homotopic, then \[
+        f^* = g^*:H^k(N)\longrightarrow H^k(M).
+    \]
+\end{theorem}
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{theorem}
+    
+\end{theorem}
 
 \section{Degree of a Mapping}
 
@@ -398,8 +955,7 @@ We discuss some applications.
 
 Now we move on the last essential part of whatever a course of homology should discuss, the Poincaré duality, the symmetry of the cohomology groups.
 
-\newpage
-\section{Duality}
+\section[Poincar\'e Duality]{Poincar\'e Duality\headingnote{Madsen, Tornhave, \emph{From Calculus to Cohomology}, \S13}}
 
 So far we have studied indiviadually the cohomology classes, now we would look at the relationship between all those cohomology in different dimensions. We use the wedge product to relate them.
 
@@ -420,7 +976,7 @@ We have those maps, if we compose them, we get the so called \emph{Poincaré map
     [\omg] &\longmapsto \Big([\eta]\longmapsto \int_M \omg\wed\eta\Big).
 \end{align*}
 
-\begin{theorem}[Poincaré duality]
+\begin{theorem}[Poincar\'e duality]
     If \(M\) is an oriented manifold of \(\dim M = n\), then \[
         \mathcal{P}_M^k: H^k(M)\xrightarrow[\hspace{2em}]{\cong} \Big(H_c^{n-k}(M)\Big)^*
     \] is a linear isomorphism. Equivalently, \(P_M^k\) is a \emph{non-degenerate} pairing.
@@ -459,12 +1015,12 @@ We have those maps, if we compose them, we get the so called \emph{Poincaré map
     \]
 \end{example}
 
-As a consequence, if \(M\) is a non-compact connected manifold, then by Poincaré duality, we have \[
+As a consequence, if \(M\) is a non-compact connected manifold, then by Poincar\'e duality, we have \[
     H^n(M) \cong H_c^0(M)^* = \{0\}^* = 0,
 \] for the number of compact connected components.
 
 \begin{example}
-    By Poincaré duality, we compute \begin{align*}
+    By Poincar\'e duality, we compute \begin{align*}
         H_c^{k+l}(M\times\R^l)
         \underset{PD}{\cong} H^{n-k}(M\times\R^l)^*
         \cong H^{n-k}(M)^*
@@ -496,11 +1052,3 @@ As a consequence, if \(M\) is a non-compact connected manifold, then by Poincar�
 %         H^1(\R^2\setminus\{0\}) \cong H_c^{1}(\R^2\setminus\{0\})^* \cong H_c^{1}(S^1\times\R)^* \cong H_c^{1}(S^1)^* \cong H^{0}(S^1)^* \cong \R.
 %     \]
 % \end{example}
-
-\section{Mayer-Vietoris Sequence}
-\section{Cohomology with Compact Support}
-\section{Degree Theory}
-\section{Poincar\'e Duality}
-
-\chapter{Sheaf Theory}
-\chapter{\v{C}ech Cohomology}

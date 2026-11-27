@@ -1,6 +1,6 @@
 \chapter{Integration on Smooth Manifolds}
 
-\section{Orientations}
+\section[Orientations]{Orientations\headingnote{Tu, \emph{An Introduction to Manifolds}, \S 21.5}}
 
 Integration can be done only on oriented manifolds, we will first discuss the notion of orientation.
 \begin{definition}
@@ -85,7 +85,7 @@ From now on, we abuse the notations and call volume forms \emph{orientations} as
         \left(\frac{\pa}{\pa x_1},\ldots,\frac{\pa}{\pa x_n}\right)
     \] is an ordered basis because \begin{align*}
         dx_1\wed\cdots\wed dx_n\left(\frac{\pa}{\pa x_1},\ldots,\frac{\pa}{\pa x_n}\right)
-        = \det(dx_i\left(\frac{\pa}{\pa x_j}\right))
+        = \det\left(dx_i\left(\frac{\pa}{\pa x_j}\right)\right)_{i,j}
         = \det(I_n) = 1.
     \end{align*}
 \end{example}
@@ -308,7 +308,7 @@ To see how the transition functions look like, we have the next theorem.
     where actually the \(n\)-th value is \(0\) (draw a diagram). Then we compute (a big Jacobian matrix).
 \end{proof}
 
-\subsection*{Boundary Orientations}
+\subsection*{Boundary Orientations\headingnote{Tu, \emph{An Introduction to Manifolds}, \S22.6}}
 
 We want to make a convention of \emph{induced orientation} on the boundary. Since there are two, we choose the \emph{outward-pointing} one. You will see later that choosing this one, makes Stokes' theorem~\ref{thm:Stokes} look more beautiful.
 \begin{definition}
@@ -341,7 +341,7 @@ We want to make a convention of \emph{induced orientation} on the boundary. Sinc
        dx_n(X_1)     & \cdots & dx_n(X_{n-1})     & 1
      \end{vmatrix}
      \begin{aligned}[t]
-       &= (-1)^n\begin{vmatrix}[r]
+       &= (-1)^n\begin{vmatrix}
             dx_1(X_1)     & \cdots & dx_1(X_{n-1}) \\
             \vdots        & \ddots & \vdots \\
             dx_{n-1}(X_1) & \cdots & dx_{n-1}(X_{n-1})
@@ -356,8 +356,8 @@ We want to make a convention of \emph{induced orientation} on the boundary. Sinc
         \left(\frac{\pa}{\pa x_1},\ldots,\frac{\pa}{\pa x_n}\right)
     \] is the corresponding ordered basis of \(\omg\), then the corresponding ordered basis of \(\omg_{\pa M}\) is \[
         \begin{dcases}
-            \left(\frac{\pa}{\pa x_1},\frac{\pa}{\pa x_2},\ldots,\frac{\pa}{\pa x_{n-1}}\right) & \text{if } n \text{ is even},\\
-            \left(\frac{\pa}{\pa x_2},\frac{\pa}{\pa x_3},\ldots,\frac{\pa}{\pa x_n}\right) & \text{if } n \text{ is odd}.\\
+            \left(\frac{\pa}{\pa x_1},\frac{\pa}{\pa x_2},\ldots,\frac{\pa}{\pa x_{n-1}}\phantom{,\frac{\pa}{\pa x_n}}\right) & \text{if } n \text{ is even},\\
+            \left(\phantom{\frac{\pa}{\pa x_1},}\,\frac{\pa}{\pa x_2},\ldots,\frac{\pa}{\pa x_{n-1}},\frac{\pa}{\pa x_n}\right) & \text{if } n \text{ is odd}.\\
         \end{dcases}
     \]
 \end{example}
@@ -376,9 +376,9 @@ We want to make a convention of \emph{induced orientation} on the boundary. Sinc
             v_1 & v_2 & v_3
         \end{vmatrix}
         = \hat{n}\cdot(u\times v) = \hat{n}\cdot(\a\hat{n}) = \a,
-    \end{align*} hence \begin{alignat*}{2}
-        (n_1 dS, n_2 dS, n_3 dS)(u,v)
-        &= \hat{n}dS(u,v) = \hat{n}\a &&= u\times v \\
+    \end{align*} hence by comparing the coefficients of \begin{alignat*}{2}
+        (n_1\,dS, n_2\,dS, n_3\,dS)(u,v)
+        &= \hat{n}\,dS(u,v) = \hat{n}\a &&= u\times v \\
         & &&= \left(\begin{vmatrix}
             u_2 & u_3 \\
             v_2 & v_3
@@ -389,13 +389,16 @@ We want to make a convention of \emph{induced orientation} on the boundary. Sinc
             u_1 & u_2 \\
             v_1 & v_2
         \end{vmatrix}\right) \\
-        & &&= \Big(dy\wed dz(u,v), dz\wed dx(u,v), dx\wed dy(u,v)\Big).
+        & &&= \Big(dy\wed dz(u,v), dz\wed dx(u,v), dx\wed dy(u,v)\Big),
     \end{alignat*}
+    we yield \[
+        n_1\,dS = dy\wed dz, \quad n_2\,dS = dz\wed dx, \quad n_3\,dS = dx\wed dy.
+    \]
 \end{example}
 
 \pagebreak
 
-\section{Integration on Smooth Manifolds}
+\section{Integration and Stokes' Theorem}
 In this section, let \(M^n\) be an \emph{oriented} manifold with or without boundary, with \(\{(\f_\a,U_\a,V_\a)\}_\a\) orientation compatible charts.
 
 \subsection*{Integration of \(n\)-forms}
@@ -406,10 +409,10 @@ Denote by \(\lda^n\) the \(n\)-dimensional \emph{Lebesgue measure} on \(\R^n\).
     We define \emph{integration} of \(\omg\in\Omg^n(M)\) \begin{enumerate}
         \item under a local chart \((\f,U,V)\) with orientation \(dx_1\wed\cdots dx_n\): Write \[
             \omg|_U = f\,dx_1\wed\cdots\wed dx_n,
-        \] for some \(f\in C^\infty(U)\), then we define \begin{equation}
-            \int_U \omg := \int_V f(x_1,\ldots,x_n)\,d\lda^n(x_1,\ldots,x_n).
-        \end{equation}
-        \item globally: Take a partition of unity \(\{\rho_\a\}_\a\) subordinate to \(\{U_\a\}_\a\),  we define \begin{equation}
+        \] for some \(f\in C^\infty(U)\), then we define \begin{equation}\label{eqn:int_form_local}
+            \int_U \omg := \int_V f(x_1,\ldots,x_n)\,d\lda^n(x_1,\ldots,x_n)
+        \end{equation} as the Lesbesgue integral in \(\R^n\).
+        \item globally: Take a partition of unity \(\{\rho_\a\}_\a\) subordinate to \(\{U_\a\}_\a\),  we define \begin{equation}\label{eqn:int_form_global}
             \int_M \omg := \sum_\a \int_{U_\a} \rho_\a\omg.
         \end{equation}
     \end{enumerate}
